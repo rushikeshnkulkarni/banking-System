@@ -1,13 +1,15 @@
-# this is Banking System project
-## in this hase two section 
-# employee login
-## see transation 
-## credit amount 
-## debit amount
-## create new customer account
-## update customer account details
-# admin login
-## employee information
-## employee account list
-## employee payment
-## add new employee
+# This is Banking System project
+    In this hase two section 
+
+    1. employee login
+        See transation 
+        Credit amount 
+        Debit amount
+        Create new customer account
+        Update customer account details
+
+    2. admin login
+        Employee information
+        Employee account list
+        Employee payment
+        Add new employee
