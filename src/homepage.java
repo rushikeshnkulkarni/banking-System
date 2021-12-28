@@ -336,13 +336,21 @@ public class homepage extends JFrame {
 					if(xx>=1)
 					{
 						JOptionPane.showMessageDialog(null, "Account Created Successfully...! ","informarion",JOptionPane.INFORMATION_MESSAGE);
+						
+						textField.setText("");
+						textField_1.setText("");
+						textField_2.setText("");
+						textField_3.setText("");
+						textArea.setText("");
+						lblNewLabel_7.setIcon(null);
+						lblNewLabel_8.setIcon(null);
 					}
 					
 					con.close();
 					
 						  
 				} catch (Exception e2) {
-					// TODO: handle exception
+				
 					 e2.printStackTrace();
 					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 
@@ -373,11 +381,6 @@ public class homepage extends JFrame {
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"<- select account Type->", "Saving ", "Current"}));
 		comboBox_1.setBounds(130, 192, 173, 26);
 		panel.add(comboBox_1);
-		
-	 lblNewLabel_27 = new JLabel("");
-	 lblNewLabel_27.setVisible(false);
-		lblNewLabel_27.setBounds(839, 50, 82, 46);
-		panel.add(lblNewLabel_27);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -1207,5 +1210,21 @@ public class homepage extends JFrame {
 		btnNewButton_10.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_10.setBounds(565, 403, 128, 44);
 		panel_3.add(btnNewButton_10);
+		
+		JButton btnNewButton_13 = new JButton("Log out");
+		btnNewButton_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				new login_page().setVisible(true);
+				dispose();
+			}
+		});
+		btnNewButton_13.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton_13.setBounds(898, 4, 98, 27);
+		contentPane.add(btnNewButton_13);
+		
+	 lblNewLabel_27 = new JLabel("");
+	 lblNewLabel_27.setBounds(823, 0, 65, 31);
+	 contentPane.add(lblNewLabel_27);
 	}
 }

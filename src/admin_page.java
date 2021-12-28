@@ -81,6 +81,8 @@ public class admin_page extends JFrame {
 	 JLabel lblNewLabel_9;
 	 JLabel lblNewLabel_10;
 	 private JTextField textField_14;
+	 private JTextField textField_15;
+	 long amount,sum;
 	/**
 	 * Launch the application.
 	 */
@@ -389,6 +391,12 @@ public class admin_page extends JFrame {
 		 			return;
 		 		}
 		 		
+		 		if(textField_15.getText().isBlank())
+		 		{
+		 			JOptionPane.showInternalMessageDialog(null,"Please enter acount number !","Warning",JOptionPane.WARNING_MESSAGE);
+		 			textField_15.requestFocusInWindow();
+		 			return;
+		 		}
 		 	
 		 		
 		 
@@ -417,7 +425,7 @@ public class admin_page extends JFrame {
 		 			try {
 		 				
 		 				con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
-		 				stmt=con.prepareStatement("insert into emp_details (emp_username,emp_password,emp_name,emp_gender,emp_post,emp_mobile,emp_salary,emp_mail,address,photo,adhar_photo,join_date) values( ?,?,?,?,?,?,?,?,?,?,?,?)");
+		 				stmt=con.prepareStatement("insert into emp_details (emp_username,emp_password,emp_name,emp_gender,emp_post,emp_mobile,emp_salary,emp_acnumber,emp_mail,address,photo,adhar_photo,join_date) values( ?,?,?,?,?,?,?,?,?,?,?,?,?)");
 		 				
 		 				stmt.setString(1,textField_3.getText().trim());
 		 				stmt.setString(2, passwordField_1.getText());
@@ -426,15 +434,31 @@ public class admin_page extends JFrame {
 		 				stmt.setString(5, comboBox_1.getSelectedItem().toString());
 		 				stmt.setString(6,textField_1.getText().trim());
 		 				stmt.setLong(7,Long.parseLong(textField_5.getText().trim()));
-		 				stmt.setString(8, textField_2.getText().trim());
-		 				stmt.setString(9, textArea.getText().trim());
+		 				stmt.setLong(8, Long.parseLong(textField_15.getText().trim()));
+		 				stmt.setString(9, textField_2.getText().trim());
+		 				stmt.setString(10, textArea.getText().trim());
 		 			   FileInputStream fin=new FileInputStream(new File(fs)); 
-						stmt.setBinaryStream(10,fin,fin.available()); 
+						stmt.setBinaryStream(11,fin,fin.available()); 
 		 				
 						   FileInputStream fin1=new FileInputStream(new File(f1)); 
-							stmt.setBinaryStream(11,fin1,fin1.available()); 
+							stmt.setBinaryStream(12,fin1,fin1.available()); 
 		 				LocalDateTime dTim =LocalDateTime.now();
-		 				stmt.setString(12,dTim.toString());
+		 				stmt.setString(13,dTim.toString());
+		 				
+		 				 sta=con.createStatement();   
+		 				 rs=sta.executeQuery("select * from cus_details where ac_number="+Long.parseLong(textField_15.getText().trim())+"");
+		 				if(rs.next())
+		 				{
+		 					
+		 				}
+		 				
+		 				else {
+		 					JOptionPane.showInternalMessageDialog(null,"Account number not found !","Warning",JOptionPane.WARNING_MESSAGE);
+				 			textField_15.requestFocusInWindow();
+				 			return;
+							
+						}
+		 				
 		 				
 		 				int xx=stmt.executeUpdate();
 		 				if(xx>=1)
@@ -450,6 +474,7 @@ public class admin_page extends JFrame {
 		 					textArea.setText("");
 		 					lblNewLabel_9.setText("");
 		 					lblNewLabel_10.setText("");
+		 					textField_15.setText("");
 		 					lblNewLabel_10.setIcon(null);	
 		 					lblNewLabel_9.setIcon(null);	
 		 				
@@ -479,7 +504,7 @@ public class admin_page extends JFrame {
 		 btnNewButton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		 btnNewButton.setToolTipText("Clicl Button");
 		 btnNewButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		 btnNewButton.setBounds(731, 384, 176, 38);
+		 btnNewButton.setBounds(385, 375, 176, 38);
 		 panel_4.add(btnNewButton);
 		 
 		 textField_5 = new JTextField();
@@ -497,12 +522,12 @@ public class admin_page extends JFrame {
 		 
 		  lblNewLabel_10 = new JLabel("");
 		 lblNewLabel_10.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		 lblNewLabel_10.setBounds(417, 210, 170, 133);
+		 lblNewLabel_10.setBounds(737, 245, 170, 133);
 		 panel_4.add(lblNewLabel_10);
 		 
 		 JLabel lblNewLabel_11 = new JLabel("Photo");
 		 lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		 lblNewLabel_11.setBounds(328, 264, 69, 30);
+		 lblNewLabel_11.setBounds(624, 297, 69, 30);
 		 panel_4.add(lblNewLabel_11);
 		 
 		 JButton btnNewButton_1 = new JButton("Browse");
@@ -525,7 +550,7 @@ public class admin_page extends JFrame {
 		 	}
 		 });
 		 btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		 btnNewButton_1.setBounds(446, 356, 109, 21);
+		 btnNewButton_1.setBounds(763, 399, 109, 21);
 		 panel_4.add(btnNewButton_1);
 		 
 		 JLabel lblNewLabel_12 = new JLabel("Adhar card");
@@ -577,6 +602,17 @@ public class admin_page extends JFrame {
 		 passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		 passwordField_1.setBounds(473, 153, 147, 19);
 		 panel_4.add(passwordField_1);
+		 
+		 JLabel lblNewLabel_28 = new JLabel("Account Number :");
+		 lblNewLabel_28.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		 lblNewLabel_28.setBounds(319, 208, 134, 21);
+		 panel_4.add(lblNewLabel_28);
+		 
+		 textField_15 = new JTextField();
+		 textField_15.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		 textField_15.setBounds(473, 208, 147, 19);
+		 panel_4.add(textField_15);
+		 textField_15.setColumns(10);
 		
 		 panel_2 = new JPanel();
 		 panel_2.setBackground(new Color(60, 179, 113));
@@ -687,25 +723,80 @@ public class admin_page extends JFrame {
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(comboBox_2.getSelectedIndex()==0)
+				if(textField_12.getText().isBlank())
 				{
-					JOptionPane.showMessageDialog(null,"Please select Post !","warning",JOptionPane.WARNING_MESSAGE);
-					comboBox_2.requestFocusInWindow();
+					JOptionPane.showMessageDialog(null,"Please Enter account number !","warning",JOptionPane.WARNING_MESSAGE);
+					textField_12.requestFocusInWindow();
 					return;
 				}
 				
-				if(textField_4.getText().trim().isBlank())
+				if(textField_13.getText().trim().isBlank())
 				{
 					JOptionPane.showMessageDialog(null,"Please Enter Salary !","warning",JOptionPane.WARNING_MESSAGE);
-					textField_4.requestFocusInWindow();
+					textField_13.requestFocusInWindow();
 					return;
+				}
+				
+				try {
+					
+					con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+					 sta=con.createStatement();   															
+					
+	 				 rs=sta.executeQuery("select * from emp_details where emp_acnumber="+Long.parseLong(textField_12.getText().trim())+"");
+	 				if(rs.next())
+	 				{
+	 					
+	 					 rs=sta.executeQuery("select total_amount from transcation where ac_number="+Long.parseLong(textField_12.getText().trim())+"");
+	 	 				 
+	 					while (rs.next()) {
+							
+							 amount=rs.getLong(1);
+							 
+						}
+	 					
+	 					sum=amount+Long.parseLong(textField_13.getText().trim());
+	 					
+	 					stmt=con.prepareStatement("insert into transcation (ac_number,credit_amount,credit_date,total_amount) values(?,?,?,?)");
+	 					
+	 					stmt.setInt(1, Integer.parseInt(textField_12.getText().trim()));
+	 					stmt.setFloat(2, Float.parseFloat(textField_13.getText().trim()));
+	 					LocalDateTime dTime=LocalDateTime.now();
+	 					stmt.setString(3, dTime.toString());
+	 					stmt.setLong(4, sum);
+	 					
+	 					int xx=stmt.executeUpdate();
+	 					if(xx>=1)
+	 					{
+	 						JOptionPane.showInternalMessageDialog(null,"Payment sucessfull !","information",JOptionPane.INFORMATION_MESSAGE);
+	 						textField_12.setText("");
+	 						textField_13.setText("");
+				 			
+	 					}
+	 					con.close();
+	 				}
+	 				
+	 				
+	 				else {
+	 					JOptionPane.showInternalMessageDialog(null,"Account number not found !","Warning",JOptionPane.WARNING_MESSAGE);
+			 			textField_12.requestFocusInWindow();
+			 			return;
+	 				}
+					
+					
+					
+					
+				} catch (Exception e2) {
+					// TODO: handle exception
+					 e2.printStackTrace();
+					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
+					 
 				}
 					
 			}
 		});
 		btnNewButton_5.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_5.setBounds(344, 360, 162, 31);
+		btnNewButton_5.setBounds(567, 353, 162, 31);
 		panel_3.add(btnNewButton_5);
 		
 		JPanel panel_6 = new JPanel();
@@ -759,7 +850,7 @@ public class admin_page extends JFrame {
 		
 		textField_12 = new JTextField();
 		textField_12.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_12.setBounds(129, 75, 155, 28);
+		textField_12.setBounds(129, 75, 178, 28);
 		panel_8.add(textField_12);
 		textField_12.setColumns(10);
 		
@@ -770,9 +861,26 @@ public class admin_page extends JFrame {
 		
 		textField_13 = new JTextField();
 		textField_13.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_13.setBounds(129, 141, 155, 26);
+		textField_13.setBounds(129, 141, 178, 26);
 		panel_8.add(textField_13);
 		textField_13.setColumns(10);
+		
+		JButton btnNewButton_5_1 = new JButton("Make Salary");
+		btnNewButton_5_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+				
+				
+				
+				
+				
+			}
+		});
+		btnNewButton_5_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_5_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		btnNewButton_5_1.setBounds(105, 353, 162, 31);
+		panel_3.add(btnNewButton_5_1);
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.setBackground(new Color(238, 130, 238));
