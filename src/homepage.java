@@ -1231,13 +1231,13 @@ public class homepage extends JFrame {
 	 	@Override
 	 	public void mouseClicked(MouseEvent e) {
 	 		
-	 		new profile_page().setVisible(true);
+	 	//	new profile_page().setVisible(true);
 	 		
 	 		
 	 		
 	 	}
 	 });
-	 lblNewLabel_27.setBounds(765, 4, 123, 27);
+	 lblNewLabel_27.setBounds(780, 4, 108, 27);
 	 contentPane.add(lblNewLabel_27);
 	}
 }
