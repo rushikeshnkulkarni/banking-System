@@ -63,11 +63,10 @@ public class admin_page extends JFrame {
 	private JPasswordField passwordField_1;
 	String fs,f1,f2;
 	Connection con;
-	ResultSet rs;
+	ResultSet rs,rs1;
 	Statement  sta;
 	PreparedStatement stmt;
 	private JTable table;
-	private JTextField textField_4;
 	private JTextField textField_6;
 	private JTextField textField_7;
 	private JTextField textField_8;
@@ -83,6 +82,9 @@ public class admin_page extends JFrame {
 	 private JTextField textField_14;
 	 private JTextField textField_15;
 	 long amount,sum;
+	 long tot,sum1;
+	 int ac;
+	 private JTable table_1;
 	/**
 	 * Launch the application.
 	 */
@@ -781,10 +783,7 @@ public class admin_page extends JFrame {
 			 			textField_12.requestFocusInWindow();
 			 			return;
 	 				}
-					
-					
-					
-					
+											
 				} catch (Exception e2) {
 					// TODO: handle exception
 					 e2.printStackTrace();
@@ -811,21 +810,82 @@ public class admin_page extends JFrame {
 		lblNewLabel_14.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		 comboBox_2 = new JComboBox();
+	
 		comboBox_2.setBounds(148, 28, 162, 21);
 		panel_6.add(comboBox_2);
 		comboBox_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"<-Select Post->", "Cashier", "Assistant", "Cleark", "Peon", "Security Guard"}));
+		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"<-Select Post->", "Cashier", "Assistant Cashier", "Cleark", "Peon", "Security Guard"}));
 		
-		JLabel lblNewLabel_15 = new JLabel("Enter Salary :");
-		lblNewLabel_15.setBounds(10, 135, 108, 13);
-		panel_6.add(lblNewLabel_15);
-		lblNewLabel_15.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				
+				DefaultTableModel dt1 =(DefaultTableModel)table_1.getModel();
+				while (dt1.getRowCount()>0)
+				{
+		           dt1.removeRow(0);
+					
+				} 
+		 		
+		 		try {
+		 			con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+		 			sta=con.createStatement();
+		 			rs=sta.executeQuery("select emp_id,emp_salary,emp_acnumber from emp_details where emp_post='"+comboBox_2.getSelectedItem().toString()+"'");
+		 			if(rs.next())
+		 			{
+		 				
+		 			}
+		 			
+		 			else {
+						
+		 				 JOptionPane.showMessageDialog(null,"employee not found !","warning",JOptionPane.WARNING_MESSAGE);	
+		 				 return;
+					}
+		 			while (rs.next()) {
+						String id= String.valueOf(  rs.getInt(1));
+						String salary= String.valueOf(rs.getInt(2));
+						String ac= String.valueOf(rs.getInt(3));
+					
+						 String data[]= { id,salary,ac};
+							DefaultTableModel dt =(DefaultTableModel)table_1.getModel();
+							dt.addRow(data);
+						
+					}
+		 			
+		 			con.close();
+		 			
+		 			
+				} catch (Exception e2) {
 		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_4.setBounds(148, 132, 162, 24);
-		panel_6.add(textField_4);
-		textField_4.setColumns(10);
+					 e2.printStackTrace();
+					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);				 
+				
+				}
+				
+				
+				
+			}
+		});
+		scrollPane_1.setBounds(10, 69, 300, 185);
+		panel_6.add(scrollPane_1);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
+		table_1.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"Employee Id", "Salary", "Account Number"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+				true, false, false
+			};
+			public boolean isCellEditable(int row, int column) {
+				return columnEditables[column];
+			}
+		});
 		
 		JLabel lblNewLabel_23 = new JLabel("By Post");
 		lblNewLabel_23.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -864,23 +924,6 @@ public class admin_page extends JFrame {
 		textField_13.setBounds(129, 141, 178, 26);
 		panel_8.add(textField_13);
 		textField_13.setColumns(10);
-		
-		JButton btnNewButton_5_1 = new JButton("Make Salary");
-		btnNewButton_5_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) 
-			{
-				
-				
-				
-				
-				
-				
-			}
-		});
-		btnNewButton_5_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_5_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnNewButton_5_1.setBounds(105, 353, 162, 31);
-		panel_3.add(btnNewButton_5_1);
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.setBackground(new Color(238, 130, 238));

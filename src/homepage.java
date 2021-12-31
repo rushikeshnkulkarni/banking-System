@@ -34,6 +34,8 @@ import java.time.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class homepage extends JFrame {
 
@@ -1224,7 +1226,18 @@ public class homepage extends JFrame {
 		contentPane.add(btnNewButton_13);
 		
 	 lblNewLabel_27 = new JLabel("");
-	 lblNewLabel_27.setBounds(823, 0, 65, 31);
+	 lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 16));
+	 lblNewLabel_27.addMouseListener(new MouseAdapter() {
+	 	@Override
+	 	public void mouseClicked(MouseEvent e) {
+	 		
+	 		new profile_page().setVisible(true);
+	 		
+	 		
+	 		
+	 	}
+	 });
+	 lblNewLabel_27.setBounds(765, 4, 123, 27);
 	 contentPane.add(lblNewLabel_27);
 	}
 }
