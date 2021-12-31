@@ -1226,18 +1226,17 @@ public class homepage extends JFrame {
 		contentPane.add(btnNewButton_13);
 		
 	 lblNewLabel_27 = new JLabel("");
-	 lblNewLabel_27.setFont(new Font("Tahoma", Font.PLAIN, 16));
 	 lblNewLabel_27.addMouseListener(new MouseAdapter() {
 	 	@Override
 	 	public void mouseClicked(MouseEvent e) {
 	 		
-	 	//	new profile_page().setVisible(true);
+	 		new profile_page().setVisible(true);
 	 		
 	 		
 	 		
 	 	}
 	 });
-	 lblNewLabel_27.setBounds(780, 4, 108, 27);
+	 lblNewLabel_27.setBounds(823, 0, 65, 31);
 	 contentPane.add(lblNewLabel_27);
 	}
 }
