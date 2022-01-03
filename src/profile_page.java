@@ -91,7 +91,7 @@ public class profile_page extends JFrame {
 	 */
 	public profile_page() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 616, 383);
+		setBounds(100, 100, 616, 412);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -174,14 +174,14 @@ public class profile_page extends JFrame {
 		 textArea.setBorder(null);
 		 textArea.setEditable(false);
 		textArea.setFont(new Font("Monospaced", Font.BOLD, 16));
-		textArea.setBounds(115, 312, 152, 34);
+		textArea.setBounds(115, 312, 152, 53);
 		contentPane.add(textArea);
 		
 		textField_4 = new JTextField();
 		textField_4.setBorder(null);
 		textField_4.setEditable(false);
 		textField_4.setFont(new Font("Tahoma", Font.BOLD, 16));
-		textField_4.setBounds(357, 261, 172, 19);
+		textField_4.setBounds(357, 261, 200, 19);
 		contentPane.add(textField_4);
 		textField_4.setColumns(10);
 		
@@ -189,7 +189,7 @@ public class profile_page extends JFrame {
 		textField_5.setBorder(null);
 		textField_5.setEditable(false);
 		textField_5.setFont(new Font("Tahoma", Font.BOLD, 16));
-		textField_5.setBounds(344, 314, 248, 19);
+		textField_5.setBounds(344, 314, 258, 19);
 		contentPane.add(textField_5);
 		textField_5.setColumns(10);
 		

@@ -71,8 +71,7 @@ public class login_page extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-   
-		JLabel lblNewLabel = new JLabel("username");
+     	JLabel lblNewLabel = new JLabel("username");
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 15));
 		lblNewLabel.setBounds(55, 69, 78, 40);
 		contentPane.add(lblNewLabel);

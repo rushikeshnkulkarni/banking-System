@@ -85,6 +85,7 @@ public class admin_page extends JFrame {
 	 long tot,sum1;
 	 int ac;
 	 private JTable table_1;
+	 private JTextField textField_4;
 	/**
 	 * Launch the application.
 	 */
@@ -1133,6 +1134,75 @@ public class admin_page extends JFrame {
 		btnNewButton_7.setBounds(789, 214, 114, 42);
 		panel_7.add(btnNewButton_7);
 		
+		JPanel panel_11 = new JPanel();
+		panel_11.setBackground(new Color(224, 255, 255));
+		tabbedPane_1.addTab("Dismiss Employee", null, panel_11, null);
+		panel_11.setLayout(null);
+		
+		JPanel panel_12 = new JPanel();
+		panel_12.setBackground(new Color(211, 211, 211));
+		panel_12.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		panel_12.setBounds(219, 79, 348, 236);
+		panel_11.add(panel_12);
+		panel_12.setLayout(null);
+		
+		JLabel lblNewLabel_15 = new JLabel("Enter Employee Id :");
+		lblNewLabel_15.setBounds(10, 60, 158, 33);
+		panel_12.add(lblNewLabel_15);
+		lblNewLabel_15.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		
+		textField_4 = new JTextField();
+		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_4.setBounds(178, 69, 158, 19);
+		panel_12.add(textField_4);
+		textField_4.setColumns(10);
+		
+		JButton btnNewButton_8 = new JButton("Dismiss");
+		btnNewButton_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(textField_4.getText().isBlank())
+				{
+					JOptionPane.showMessageDialog(null, " Please Enter  Employee Id !","Warning",JOptionPane.WARNING_MESSAGE);
+				    textField_4.requestFocusInWindow();
+					return;	
+				}
+				
+				try {
+					
+					Connection  con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+				 PreparedStatement stmt=con.prepareStatement("delete from emp_details where emp_id="+Integer.parseInt(textField_4.getText().trim())+"");
+				int xx=	stmt.executeUpdate();
+				
+				if(xx>=1)
+				{
+					JOptionPane.showMessageDialog(null, "Employee dismissed !","Infromation",JOptionPane.INFORMATION_MESSAGE);
+					textField_4.setText("");
+				}
+				
+				else {
+					
+					JOptionPane.showMessageDialog(null, " Please Enter Correct Employee Id !","Warning",JOptionPane.WARNING_MESSAGE);
+				    textField_4.requestFocusInWindow();
+					return;
+		
+				}
+				
+				} catch (Exception e2) {
+										
+					e2.printStackTrace();
+					JOptionPane.showMessageDialog(null, e);
+				}
+				
+				
+				
+				
+			}
+		});
+		btnNewButton_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_8.setBounds(128, 165, 104, 33);
+		panel_12.add(btnNewButton_8);
+		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Customer Section", null, panel_1, null);
 		panel_1.setLayout(null);
@@ -1141,6 +1211,12 @@ public class admin_page extends JFrame {
 		tabbedPane_2.setBounds(0, 0, 971, 478);
 		tabbedPane_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.add(tabbedPane_2);
+		
+		JPanel panel_9 = new JPanel();
+		tabbedPane_2.addTab("Customer list", null, panel_9, null);
+		
+		JPanel panel_10 = new JPanel();
+		tabbedPane_2.addTab("Transcation Statement", null, panel_10, null);
 		
 		
 	}
