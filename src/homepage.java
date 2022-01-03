@@ -44,7 +44,7 @@ public class homepage extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	JLabel lblNewLabel_27;
+	public JLabel lblNewLabel_27;
 	/**
 	 * Launch the application.
 	 */
@@ -93,6 +93,7 @@ public class homepage extends JFrame {
 	 * Create the frame.
 	 */
 	public homepage() {
+			
 		setTitle("homepage");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1020, 569);
@@ -1229,8 +1230,11 @@ public class homepage extends JFrame {
 	 lblNewLabel_27.addMouseListener(new MouseAdapter() {
 	 	@Override
 	 	public void mouseClicked(MouseEvent e) {
-	 		
-	 		new profile_page().setVisible(true);
+	 		profile_page pgPage=new profile_page();
+	 		pgPage.lblNewLabel_8.setText(lblNewLabel_27.getText());
+	 			pgPage.profile(lblNewLabel_27.getText());
+	 	      pgPage.setVisible(true);
+	 	     
 	 		
 	 		
 	 		

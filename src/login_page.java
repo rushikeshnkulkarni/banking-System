@@ -27,14 +27,14 @@ public class login_page extends JFrame {
 
 	private JPanel contentPane;
 	private JPasswordField passwordField;
-	private JTextField txtEnterUsername;
+	public JTextField txtEnterUsername;
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	Connection con;
 	Statement stmt;
 	ResultSet rs;
 	  String a;
-	  String b;
+	  String b,n;
 	  int otp;
 	  Long bb;
 	public  String usname;
@@ -83,10 +83,12 @@ public class login_page extends JFrame {
 		contentPane.add(lblNewLabel_1);
 		
 		passwordField = new JPasswordField();
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		passwordField.setBounds(213, 159, 190, 30);
 		contentPane.add(passwordField);
 		
 		txtEnterUsername = new JTextField();
+		txtEnterUsername.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtEnterUsername.setBounds(213, 79, 190, 30);
 		contentPane.add(txtEnterUsername);
 		txtEnterUsername.setColumns(10);
@@ -97,14 +99,14 @@ public class login_page extends JFrame {
 				
 				if(txtEnterUsername.getText().trim().isBlank())
 				{
-					JOptionPane.showMessageDialog(null,"please enter username !","warning",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,"please enter username !","warning",JOptionPane.WARNING_MESSAGE);
 					txtEnterUsername.requestFocusInWindow();
 					return;
 				}
 				
 				if(passwordField.getText().trim().isBlank())
 				{
-					JOptionPane.showMessageDialog(null,"please enter passwod !","warning",JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null,"please enter passwod !","warning",JOptionPane.WARNING_MESSAGE);
 					passwordField.requestFocusInWindow();
 				
 					return;
@@ -135,6 +137,9 @@ public class login_page extends JFrame {
 							   btnNewButton_2.setVisible(true);
 							    homepage hp=new homepage();
 							    hp.lblNewLabel_27.setText(txtEnterUsername.getText());
+							//	profile_page pgPage=new profile_page();
+						 		// pgPage.lblNewLabel_8.setText(txtEnterUsername.getText());
+						 	
 							   hp.setVisible(true);
 							    dispose();
 						 
