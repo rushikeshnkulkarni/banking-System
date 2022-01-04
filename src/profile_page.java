@@ -18,11 +18,13 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.SystemColor;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class profile_page extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	public JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
@@ -78,8 +80,10 @@ public class profile_page extends JFrame {
 			con.close();
 			
 			 
-		} catch (Exception e) {
-			// TODO: handle exception
+		}
+		 
+		 catch (Exception e) 
+		 {
 			JOptionPane.showInternalMessageDialog(null,"Something went wrong !","Error",JOptionPane.WARNING_MESSAGE);
 			 e.printStackTrace();		
 			 return;
@@ -91,7 +95,7 @@ public class profile_page extends JFrame {
 	 */
 	public profile_page() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 616, 412);
+		setBounds(100, 100, 616, 443);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -129,7 +133,7 @@ public class profile_page extends JFrame {
 		
 		JLabel lblNewLabel_6 = new JLabel("Address :");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_6.setBounds(23, 313, 82, 23);
+		lblNewLabel_6.setBounds(10, 313, 69, 23);
 		contentPane.add(lblNewLabel_6);
 		
 		 lblNewLabel_7 = new JLabel("");
@@ -174,7 +178,7 @@ public class profile_page extends JFrame {
 		 textArea.setBorder(null);
 		 textArea.setEditable(false);
 		textArea.setFont(new Font("Monospaced", Font.BOLD, 16));
-		textArea.setBounds(115, 312, 152, 53);
+		textArea.setBounds(100, 312, 167, 53);
 		contentPane.add(textArea);
 		
 		textField_4 = new JTextField();
@@ -197,6 +201,22 @@ public class profile_page extends JFrame {
 		lblNewLabel_8.setVisible(false);
 		lblNewLabel_8.setBounds(420, 63, 74, 41);
 		contentPane.add(lblNewLabel_8);
+		
+		JLabel lblNewLabel_9 = new JLabel("Change username and password");
+		lblNewLabel_9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				change_user_pass ch=new change_user_pass();
+				ch.lblNewLabel_2.setText(textField.getText());
+				ch.setVisible(true);
+								
+				
+			}
+		});
+		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_9.setForeground(new Color(30, 144, 255));
+		lblNewLabel_9.setBounds(289, 368, 268, 13);
+		contentPane.add(lblNewLabel_9);
 		mm=lblNewLabel_8.getText();
 
 	}
