@@ -44,9 +44,7 @@ public class login_page extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	
-	
-	
+		
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -70,7 +68,7 @@ public class login_page extends JFrame {
 	}
 	
 	public login_page() {
-		timeC();
+	
 		setTitle("Login Page");
 		setBounds(100, 100, 490, 356);
 		contentPane = new JPanel();
@@ -170,15 +168,58 @@ public class login_page extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				new admin_page().setVisible(true);
+				if(txtEnterUsername.getText().trim().isBlank())
+				{
+					JOptionPane.showMessageDialog(null,"please enter username !","warning",JOptionPane.WARNING_MESSAGE);
+					txtEnterUsername.requestFocusInWindow();
+					return;
+				}
 				
+				if(passwordField.getText().trim().isBlank())
+				{
+					JOptionPane.showMessageDialog(null,"please enter passwod !","warning",JOptionPane.WARNING_MESSAGE);
+					passwordField.requestFocusInWindow();
 				
+					return;
+				}
 				
-				
-				
-				
-				
-				
+				else {
+					
+					try {
+						
+						 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");  
+						 stmt=con.createStatement();  
+						  rs=stmt.executeQuery("select 	admin_username,admin_password from admin_details where admin_username='"+txtEnterUsername.getText().trim()+"' and admin_password='"+passwordField.getText().trim()+"'");
+						
+						  while(rs.next())
+							{
+								 a=rs.getString(1);
+								 b=rs.getString(2);
+							
+							}
+							con.close();	
+					
+						  String us=txtEnterUsername.getText().trim();
+						  String pass=passwordField.getText().trim();
+							if(pass.equals(b)&&us.equals(a))
+							{
+								JOptionPane.showMessageDialog(null, "login success","info",JOptionPane.INFORMATION_MESSAGE);	
+								admin_page ad= new admin_page();
+								ad.lblNewLabel_29.setText(us);
+								ad.setVisible(true);
+								dispose();		
+							}
+							else {
+									JOptionPane.showMessageDialog(null, "please enter correct password !","warning",JOptionPane.WARNING_MESSAGE);
+							}
+						
+					} catch (Exception e2) {
+					
+						 e2.printStackTrace();
+							JOptionPane.showMessageDialog(null, "something went wrong !","error ",JOptionPane.ERROR_MESSAGE);
+							
+					}
+				}
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
@@ -188,12 +229,7 @@ public class login_page extends JFrame {
 		lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.setBounds(363, 10, 103, 13);
 		contentPane.add(lblNewLabel_2);
-	
-		
+			
+	}	
 	}
-	
-
-	
-	
-}
 

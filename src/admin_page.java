@@ -49,6 +49,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JScrollPane;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 
 public class admin_page extends JFrame {
 
@@ -86,6 +89,7 @@ public class admin_page extends JFrame {
 	 int ac;
 	 private JTable table_1;
 	 private JTextField textField_4;
+	public JLabel lblNewLabel_29;
 	/**
 	 * Launch the application.
 	 */
@@ -109,11 +113,28 @@ public class admin_page extends JFrame {
 	
 	
 	public admin_page() {
+		setTitle("Admin Page");
 		
 		
 			
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1020, 569);
+		setBounds(100, 100, 1020, 580);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		setJMenuBar(menuBar);
+		
+		JMenu mnNewMenu_1 = new JMenu("New");
+		menuBar.add(mnNewMenu_1);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Create new  Admin");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				new new_admin().setVisible(true);
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem);
 		contentPane = new JPanel();
 		contentPane.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		setContentPane(contentPane);
@@ -833,16 +854,16 @@ public class admin_page extends JFrame {
 		 			con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
 		 			sta=con.createStatement();
 		 			rs=sta.executeQuery("select emp_id,emp_salary,emp_acnumber from emp_details where emp_post='"+comboBox_2.getSelectedItem().toString()+"'");
-		 			if(rs.next())
-		 			{
+		 		//	if(rs.next())
+		 		//	{
 		 				
-		 			}
+		 	//		}
 		 			
-		 			else {
+		 		//	else {
 						
-		 				 JOptionPane.showMessageDialog(null,"employee not found !","warning",JOptionPane.WARNING_MESSAGE);	
-		 				 return;
-					}
+		 			//	 JOptionPane.showMessageDialog(null,"employee not found !","warning",JOptionPane.WARNING_MESSAGE);	
+		 	//			 return;
+				//	}
 		 			while (rs.next()) {
 						String id= String.valueOf(  rs.getInt(1));
 						String salary= String.valueOf(rs.getInt(2));
@@ -1124,10 +1145,7 @@ public class admin_page extends JFrame {
 			 		 e2.printStackTrace();
 					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 					 
-				}
-				
-				
-				
+				}			
 			}
 		});
 		btnNewButton_7.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
@@ -1192,10 +1210,7 @@ public class admin_page extends JFrame {
 										
 					e2.printStackTrace();
 					JOptionPane.showMessageDialog(null, e);
-				}
-				
-				
-				
+				}				
 				
 			}
 		});
@@ -1218,6 +1233,35 @@ public class admin_page extends JFrame {
 		JPanel panel_10 = new JPanel();
 		tabbedPane_2.addTab("Transcation Statement", null, panel_10, null);
 		
+		JButton btnNewButton_9 = new JButton("Logout");
+		btnNewButton_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int a=JOptionPane.showConfirmDialog(null,"Are you sure ?");
+				if(a==JOptionPane.YES_OPTION)
+				{
+				new login_page().setVisible(true);
+				dispose();
+				}
+			}
+		});
+		btnNewButton_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnNewButton_9.setBounds(918, 0, 88, 31);
+		contentPane.add(btnNewButton_9);
 		
+		 lblNewLabel_29 = new JLabel("");
+		 lblNewLabel_29.addMouseListener(new MouseAdapter() {
+		 	@Override
+		 	public void mouseClicked(MouseEvent e) {
+		 		
+		 		profile_page pgPage=new profile_page();
+		 		pgPage.lblNewLabel_8.setText(lblNewLabel_29.getText());
+		 			pgPage.profile1(lblNewLabel_29.getText());
+		 	      pgPage.setVisible(true); 		
+		 			 		
+		 	}
+		 });
+		lblNewLabel_29.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_29.setBounds(836, 0, 72, 24);
+		contentPane.add(lblNewLabel_29);		
 	}
 }

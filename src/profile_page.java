@@ -89,11 +89,56 @@ public class profile_page extends JFrame {
 			 return;
 
 		}		 
+	}  
+	
+	
+	public void profile1(String ss) {
+		
+		 try {
+						
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+			Statement  sta=con.createStatement();  
+			ResultSet rs=sta.executeQuery("select admin_id,	admin_name,admin_gender,admin_mobile,admin_mail,admin_address,photo from admin_details where admin_username='"+ss+"'");
+			
+			while (rs.next()) 
+			{
+				textField.setText(String.valueOf(rs.getInt(1)));
+				textField_2.setText(rs.getString(2));
+				textField_1.setText(rs.getString(3));
+				textField_4.setText("Admin");
+				textField_3.setText(rs.getString(4));
+				textField_5.setText(rs.getString(5));
+				textArea.setText(rs.getString(6));
+				
+				 byte[] img=rs.getBytes(7);
+					ImageIcon image =new ImageIcon(img);
+					Image in=image.getImage();
+					Image myImage =in.getScaledInstance(lblNewLabel_7.getWidth(),lblNewLabel_7.getHeight(),Image.SCALE_SMOOTH);
+					ImageIcon newimage=new ImageIcon(myImage);
+					lblNewLabel_7.setIcon(newimage);
+				
+		}
+			con.close();
+			
+			 
+		}
+		 
+		 catch (Exception e) 
+		 {
+			JOptionPane.showInternalMessageDialog(null,"Something went wrong !","Error",JOptionPane.WARNING_MESSAGE);
+			 e.printStackTrace();		
+			 return;
+
+		}		 
 	}   
+	
+	
 	/**
+	 * 
 	 * Create the frame.
 	 */
 	public profile_page() {
+		setTitle("Profile page");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 616, 443);
 		contentPane = new JPanel();
@@ -215,7 +260,7 @@ public class profile_page extends JFrame {
 		});
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel_9.setForeground(new Color(30, 144, 255));
-		lblNewLabel_9.setBounds(289, 368, 268, 13);
+		lblNewLabel_9.setBounds(289, 368, 268, 20);
 		contentPane.add(lblNewLabel_9);
 		mm=lblNewLabel_8.getText();
 

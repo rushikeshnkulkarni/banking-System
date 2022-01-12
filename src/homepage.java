@@ -203,8 +203,7 @@ public class homepage extends JFrame {
 				chooser.showOpenDialog(null);
 				File file= chooser.getSelectedFile();
 			String filename=file.getAbsolutePath();
-			//	pass.setText(filename);
-			//	image .getAbsoulatePath=null;
+		
 				fs=filename;
 				
 				ImageIcon ic= new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(lblNewLabel_7.getWidth(),lblNewLabel_7.getHeight(),Image.SCALE_SMOOTH));
@@ -229,19 +228,13 @@ public class homepage extends JFrame {
 				chooser.showOpenDialog(null);
 				File file= chooser.getSelectedFile();
 			String filename=file.getAbsolutePath();
-			//	pass.setText(filename);
-			//	image .getAbsoulatePath=null;
+		
 				fs2=filename;
 				
 				ImageIcon ic= new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(lblNewLabel_8.getWidth(),lblNewLabel_8.getHeight(),Image.SCALE_SMOOTH));
 				
 				lblNewLabel_8.setIcon(ic);
-				
-				
-				
-				
-				
-				
+								
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
@@ -326,11 +319,9 @@ public class homepage extends JFrame {
 				   
 				  FileInputStream fin1=new FileInputStream(new File(fs2)); 
 				  ps.setBinaryStream(10,fin1,fin1.available());
-				  
-				 
+				  			 
 				 ps.setString(11, lblNewLabel_27.getText()); 
-				 
-	
+				 	
 				    LocalDateTime date=LocalDateTime.now();  // load the current date and time
 				 ps.setString(12, date.toString());            
 				 
@@ -431,8 +422,7 @@ public class homepage extends JFrame {
 		             return;
 				}
 				
-			
-				
+							
 		        try {
 		    
 		        	
@@ -491,9 +481,7 @@ public class homepage extends JFrame {
 					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 
 				}
-				
-				
-				
+								
 			}
 		});
 		btnNewButton_3.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -601,7 +589,7 @@ public class homepage extends JFrame {
 					 rs=stmt.executeQuery("select total_amount from transcation where ac_number="+Integer.parseInt(textField_8.getText().trim())+"");
 						
 					 while (rs.next()) {
-							// tot=rs.getInt("total_amount");
+						
 						   tot=rs.getFloat("total_amount");
 						}
 					 
@@ -700,9 +688,7 @@ public class homepage extends JFrame {
 					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 
 				}
-				
-				
-				
+					
 			}
 			
 		});
@@ -767,7 +753,6 @@ public class homepage extends JFrame {
 					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 					
 				}
-				
 				
 			}
 		});
@@ -874,9 +859,7 @@ public class homepage extends JFrame {
 					}
 					 
 					 while (rs.next()) {
-					
-						
-					
+																
 					String account_no=String.valueOf(rs.getInt(1));
 					String credit_amount=String.valueOf(rs.getInt(2));
 					String credit_date=rs.getString(3);
@@ -896,8 +879,7 @@ public class homepage extends JFrame {
 					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 					
 				}
-				
-				
+								
 			}
 		});
 		btnNewButton_11.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
@@ -1040,8 +1022,7 @@ public class homepage extends JFrame {
 				chooser.showOpenDialog(null);
 				File file= chooser.getSelectedFile();
 			String filename=file.getAbsolutePath();
-			//	pass.setText(filename);
-			//	image .getAbsoulatePath=null;
+		
 				fs=filename;
 				
 				ImageIcon ic= new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(lblNewLabel_25.getWidth(),lblNewLabel_25.getHeight(),Image.SCALE_SMOOTH));
@@ -1075,17 +1056,13 @@ public class homepage extends JFrame {
 				chooser.showOpenDialog(null);
 				File file= chooser.getSelectedFile();
 			String filename=file.getAbsolutePath();
-			//	pass.setText(filename);
-			//	image .getAbsoulatePath=null;
+		
 				fs2=filename;
 				
 				ImageIcon ic= new ImageIcon(new ImageIcon(filename).getImage().getScaledInstance(lblNewLabel_26.getWidth(),lblNewLabel_26.getHeight(),Image.SCALE_SMOOTH));
 				
 				lblNewLabel_26.setIcon(ic);
-				
 								
-				
-				
 			}
 		});
 		btnNewButton_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -1109,9 +1086,7 @@ public class homepage extends JFrame {
 					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
 					 stmt=con.createStatement();
 					 rs=stmt.executeQuery("select fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,photo,addhar_photo from cus_details where ac_number="+Integer.parseInt(textField_16.getText().trim())+"");
-		     	  
-					
-					 
+		     	  					 
 					 while (rs.next()) {
 						
 						 textField_10.setText(rs.getString(1));
@@ -1135,12 +1110,9 @@ public class homepage extends JFrame {
 							Image myImage1 =in1.getScaledInstance(lblNewLabel_26.getWidth(),lblNewLabel_26.getHeight(),Image.SCALE_SMOOTH);
 							ImageIcon newimage1=new ImageIcon(myImage1);
 							lblNewLabel_26.setIcon(newimage1);
-							
-							
+														
 					}
-					 con.close();
-					
-			
+					 con.close();			
 				}
 				
 				catch (Exception e2) {
@@ -1148,11 +1120,7 @@ public class homepage extends JFrame {
 					 e2.printStackTrace();
 					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 					
-				}
-				
-				
-				
-				
+				}				
 			}
 		});
 		btnNewButton_8.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -1201,12 +1169,7 @@ public class homepage extends JFrame {
 					 e2.printStackTrace();
 					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 					
-				}
-				
-				
-				
-				
-				
+				}				
 			}
 		});
 		btnNewButton_10.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
@@ -1217,9 +1180,14 @@ public class homepage extends JFrame {
 		JButton btnNewButton_13 = new JButton("Log out");
 		btnNewButton_13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				new login_page().setVisible(true);
-				dispose();
+				int a=JOptionPane.showConfirmDialog(null,"Are you sure ?");
+				if(a==JOptionPane.YES_OPTION)
+				{
+
+					new login_page().setVisible(true);
+					dispose();
+				}
+
 			}
 		});
 		btnNewButton_13.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -1233,11 +1201,7 @@ public class homepage extends JFrame {
 	 		profile_page pgPage=new profile_page();
 	 		pgPage.lblNewLabel_8.setText(lblNewLabel_27.getText());
 	 			pgPage.profile(lblNewLabel_27.getText());
-	 	      pgPage.setVisible(true);
-	 	     
-	 		
-	 		
-	 		
+	 	      pgPage.setVisible(true); 		
 	 	}
 	 });
 	 lblNewLabel_27.setBounds(823, 0, 65, 31);
