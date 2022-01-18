@@ -124,7 +124,7 @@ public class login_page extends JFrame {
 						
 						 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");  
 						 stmt=con.createStatement();  
-						  rs=stmt.executeQuery("select emp_username,emp_password from emp_details where emp_username='"+txtEnterUsername.getText().trim()+"' and emp_password='"+passwordField.getText().trim()+"'");
+						  rs=stmt.executeQuery("select emp_username,emp_password from emp_details where emp_username='"+txtEnterUsername.getText().trim()+"' and emp_password=md5('"+passwordField.getText().trim()+"')");
 						
 						  while(rs.next())
 							{
@@ -135,8 +135,8 @@ public class login_page extends JFrame {
 							con.close();	
 					
 						  String us=txtEnterUsername.getText().trim();
-						  String pass=passwordField.getText().trim();
-							if(pass.equals(b)&&us.equals(a))
+					//	  String pass=passwordField.getText().trim();
+							if(us.equals(a))
 							{
 								JOptionPane.showMessageDialog(null, "login success","info",JOptionPane.INFORMATION_MESSAGE);							 
 							    homepage hp=new homepage();
@@ -189,7 +189,7 @@ public class login_page extends JFrame {
 						
 						 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");  
 						 stmt=con.createStatement();  
-						  rs=stmt.executeQuery("select 	admin_username,admin_password from admin_details where admin_username='"+txtEnterUsername.getText().trim()+"' and admin_password='"+passwordField.getText().trim()+"'");
+						  rs=stmt.executeQuery("select 	admin_username,admin_password from admin_details where admin_username='"+txtEnterUsername.getText().trim()+"' and admin_password=md5('"+passwordField.getText().trim()+"')");
 						
 						  while(rs.next())
 							{
@@ -200,10 +200,11 @@ public class login_page extends JFrame {
 							con.close();	
 					
 						  String us=txtEnterUsername.getText().trim();
-						  String pass=passwordField.getText().trim();
-							if(pass.equals(b)&&us.equals(a))
+					//	  String pass=passwordField.getText().trim();
+							if(us.equals(a))
 							{
-								JOptionPane.showMessageDialog(null, "login success","info",JOptionPane.INFORMATION_MESSAGE);	
+								JOptionPane.showMessageDialog(null, "login success","info",JOptionPane.INFORMATION_MESSAGE);
+							
 								admin_page ad= new admin_page();
 								ad.lblNewLabel_29.setText(us);
 								ad.setVisible(true);

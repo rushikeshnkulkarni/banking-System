@@ -102,7 +102,7 @@ public class change_user_pass extends JFrame {
 					 {
 					 
 					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
-				PreparedStatement stmt=con.prepareStatement("update emp_details set emp_password= ? where 	emp_id= ?");
+				PreparedStatement stmt=con.prepareStatement("update emp_details set emp_password= md5(?) where 	emp_id= ?");
 					stmt.setString(1, textField_1.getText().trim());		
 					stmt.setInt(2, Integer.parseInt(lblNewLabel_2.getText()));	
 					
@@ -135,23 +135,7 @@ public class change_user_pass extends JFrame {
 					 e2.printStackTrace();		
 					 return;
 
-				}		 
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				}		 			
 				
 			}
 		});
@@ -218,13 +202,7 @@ public class change_user_pass extends JFrame {
 					 return;
 
 				}		 
-				
-				
-				
-				
-				
-				
-				
+					
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));

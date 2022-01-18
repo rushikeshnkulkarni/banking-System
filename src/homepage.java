@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.text.MessageFormat;
 import java.util.Date;
 import java.awt.*;
 import javax.swing.JFrame;
@@ -36,6 +37,10 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class homepage extends JFrame {
 
@@ -74,8 +79,9 @@ public class homepage extends JFrame {
 	ResultSet rs;
 	private JTextField textField_17;
 	private JTable table_1;
-	
-
+	private JTextField txtEnterAccountNumber;
+	JTextArea textArea_2;
+	String  ifccode1,fullname,gender,accountType,birthdate,addhar_number ;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -173,6 +179,7 @@ public class homepage extends JFrame {
 		panel.add(lblNewLabel_5);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("Arial", Font.PLAIN, 16));
 		textArea.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		textArea.setBounds(130, 347, 153, 76);
 		panel.add(textArea);
@@ -245,6 +252,8 @@ public class homepage extends JFrame {
 		btnNewButton_2.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+			String nString=	lblNewLabel_27.getText();
 			
 				if(textField.getText().trim().isBlank())
 				{
@@ -320,7 +329,7 @@ public class homepage extends JFrame {
 				  FileInputStream fin1=new FileInputStream(new File(fs2)); 
 				  ps.setBinaryStream(10,fin1,fin1.available());
 				  			 
-				 ps.setString(11, lblNewLabel_27.getText()); 
+				 ps.setString(11,nString ); 
 				 	
 				    LocalDateTime date=LocalDateTime.now();  // load the current date and time
 				 ps.setString(12, date.toString());            
@@ -758,7 +767,7 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_9.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_9.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_9.setBounds(396, 409, 125, 38);
+		btnNewButton_9.setBounds(314, 409, 125, 38);
 		panel_4.add(btnNewButton_9);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -799,8 +808,33 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_12.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_12.setBounds(581, 409, 102, 38);
+		btnNewButton_12.setBounds(490, 409, 102, 38);
 		panel_4.add(btnNewButton_12);
+		
+		JButton btnNewButton_17 = new JButton("Print List");
+		btnNewButton_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				try {
+					
+					if(	table.print())
+					{
+						JOptionPane.showMessageDialog(null,"PDF downloaded ","Information",JOptionPane.INFORMATION_MESSAGE);	 		
+					}
+					
+					}
+				catch (Exception e2)
+					{
+						// TODO: handle exception
+					}			
+				
+				
+			}
+		});
+		btnNewButton_17.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_17.setBounds(652, 409, 118, 38);
+		panel_4.add(btnNewButton_17);
 		
 		JPanel panel_5 = new JPanel();
 		tabbedPane.addTab("Transcation Statement", null, panel_5, null);
@@ -908,6 +942,28 @@ public class homepage extends JFrame {
 			}
 		});
 		table_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		
+		JButton btnNewButton_14 = new JButton("print");
+		btnNewButton_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			
+				try {
+					
+					if(	table_1.print())
+					{
+						JOptionPane.showMessageDialog(null,"PDF downloaded ","Information",JOptionPane.INFORMATION_MESSAGE);	 		
+					}
+					
+					}
+				catch (Exception e2)
+					{
+						// TODO: handle exception
+					}			
+			}
+		});
+		btnNewButton_14.setBounds(760, 30, 99, 31);
+		panel_5.add(btnNewButton_14);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
@@ -1176,6 +1232,122 @@ public class homepage extends JFrame {
 		btnNewButton_10.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_10.setBounds(565, 403, 128, 44);
 		panel_3.add(btnNewButton_10);
+		
+		JPanel panel_6 = new JPanel();
+		tabbedPane.addTab("Print Passbook", null, panel_6, null);
+		panel_6.setLayout(null);
+		
+		txtEnterAccountNumber = new JTextField();
+		txtEnterAccountNumber.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				
+				if(txtEnterAccountNumber.getText().equals("Enter account number"))
+					txtEnterAccountNumber.setText("");
+				
+				
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				
+				if(txtEnterAccountNumber.getText().trim().equals(""))
+				txtEnterAccountNumber.setText("Enter account number");
+				
+			}
+		});
+		txtEnterAccountNumber.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		txtEnterAccountNumber.setText("Enter account number");	
+		txtEnterAccountNumber.setBounds(22, 156, 176, 24);
+		panel_6.add(txtEnterAccountNumber);
+		txtEnterAccountNumber.setColumns(10);
+		
+		JButton btnNewButton_15 = new JButton("View Profile");
+		btnNewButton_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				if(txtEnterAccountNumber.getText().equals("Enter account number"))
+				{
+					JOptionPane.showMessageDialog(null,"enter account number !","warning",JOptionPane.WARNING_MESSAGE);
+					txtEnterAccountNumber.requestFocusInWindow();
+					return;
+				}
+					
+				try {
+
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 stmt=con.createStatement();
+					 rs=stmt.executeQuery("select 	ifccode, fullname,gender,accountType,birthdate,addhar_number from cus_details where ac_number="+Integer.parseInt(txtEnterAccountNumber.getText().trim())+"");
+					
+						 JOptionPane.showMessageDialog(null,"please enter correct account number  !","warning",JOptionPane.ERROR_MESSAGE);
+						
+				
+					
+		     	  	while (rs.next()) {
+		     	         		
+		     	  		ifccode1=rs.getString(1);
+		     	  		fullname=rs.getString(2);
+		     	  		gender=rs.getString(3);
+		     	  		accountType=rs.getString(4);
+		     	  		birthdate=rs.getString(5);
+		     	  		addhar_number=rs.getString(6);
+						
+					}		
+					 
+		     	  	
+		     	  	
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace();
+				}
+				
+				
+				
+				
+				textArea_2.setText("\t\t"+"     "+" RSD Bank \n");
+				textArea_2.setText(textArea_2.getText()+"================================================================================\n\n");
+				textArea_2.setText(textArea_2.getText()+"name :"+" "+""+fullname+"      \n\n");
+				textArea_2.setText(textArea_2.getText()+"Account Type :"+" "+""+accountType+"    \n\n");
+				textArea_2.setText(textArea_2.getText()+"Account Number :"+" "+""+txtEnterAccountNumber.getText().trim()+"     \t\t photo here\n\n");
+				textArea_2.setText(textArea_2.getText()+"IFC Code :"+" "+""+ifccode+"		\n\n ");
+				textArea_2.setText(textArea_2.getText()+"Birth Date :"+" "+""+birthdate+"    \n\n");
+				textArea_2.setText(textArea_2.getText()+"Gender :"+" "+""+gender+"    \n\n");
+				textArea_2.setText(textArea_2.getText()+"Adhar Number :"+ " "+""+addhar_number+"     \n \n");
+				textArea_2.setText(textArea_2.getText()+"Bank Address : Gandhi chowk,latur-413512.      \n \n");
+				textArea_2.setText(textArea_2.getText()+"\n\n\t\t\t\t singnature");
+				textArea_2.setText(textArea_2.getText()+"\n\n================================================================================");
+								
+			}
+		});
+		btnNewButton_15.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
+		btnNewButton_15.setBounds(22, 246, 159, 24);
+		panel_6.add(btnNewButton_15);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(360, 10, 585, 425);
+		panel_6.add(scrollPane_2);
+		
+		textArea_2 = new JTextArea();
+		textArea_2.setEditable(false);
+		scrollPane_2.setViewportView(textArea_2);
+		textArea_2.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		textArea_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		
+		JButton btnNewButton_16 = new JButton("Print");
+		btnNewButton_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					textArea_2.print();
+				} catch (Exception e2) {
+					// TODO: handle exception
+				}
+			}
+		});
+		btnNewButton_16.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_16.setBounds(216, 246, 85, 24);
+		panel_6.add(btnNewButton_16);
 		
 		JButton btnNewButton_13 = new JButton("Log out");
 		btnNewButton_13.addActionListener(new ActionListener() {

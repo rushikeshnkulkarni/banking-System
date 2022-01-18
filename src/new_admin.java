@@ -50,6 +50,7 @@ public class new_admin extends JFrame {
 	JTextArea textArea;
 	Connection con;
 	String fs,fs1;
+	JLabel lblNewLabel_12 ;
 	/**
 	 * Launch the application.
 	 */
@@ -262,7 +263,7 @@ public class new_admin extends JFrame {
 					
 					try {
 						con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
-					PreparedStatement stmt=con.prepareStatement("insert into admin_details (admin_username,admin_password,admin_name,admin_gender,admin_mobile,admin_salary,admin_acnumber,admin_mail,	admin_address,	photo,	adhar_photo,join_date,	joined-by) values(?,?,?,?,?,?,?,?,?,?,?,?,?)");
+					PreparedStatement stmt=con.prepareStatement("insert into admin_details (admin_username,admin_password,admin_name,admin_gender,admin_mobile,admin_salary,admin_acnumber,admin_mail,	admin_address,	photo,	adhar_photo,join_date,	joined_by) values(?,md5(?),?,?,?,?,?,?,?,?,?,?,?)");
 						
 						stmt.setString(1, textField_5.getText().trim());
 						stmt.setString(2, passwordField_1.getText().trim());
@@ -282,6 +283,10 @@ public class new_admin extends JFrame {
 					  
 					  LocalDate dt=LocalDate.now();
 					  stmt.setString(12, dt.toString());
+					  
+					  admin_page ad= new admin_page();
+				
+					  stmt.setString(13, ad.lblNewLabel_29.getText() );
 					  
 					int xx=  stmt.executeUpdate();
 					  if(xx>=1)
@@ -303,7 +308,7 @@ public class new_admin extends JFrame {
 					
 					catch (Exception e2) {
 						
-						e2.getStackTrace();
+						e2.printStackTrace();
 			        	JOptionPane.showMessageDialog(null, "something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 					}
 				}
@@ -370,5 +375,9 @@ public class new_admin extends JFrame {
 		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		passwordField_1.setBounds(567, 171, 191, 19);
 		contentPane.add(passwordField_1);
+		
+		lblNewLabel_12 = new JLabel("");
+		lblNewLabel_12.setBounds(338, 24, 45, 13);
+		contentPane.add(lblNewLabel_12);
 	}
 }

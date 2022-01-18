@@ -130,9 +130,7 @@ public class profile_page extends JFrame {
 			 return;
 
 		}		 
-	}   
-	
-	
+	}   	
 	/**
 	 * 
 	 * Create the frame.
@@ -251,10 +249,20 @@ public class profile_page extends JFrame {
 		lblNewLabel_9.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				String nn=textField_4.getText();
+			
+			if(nn.equals("Admin"))
+			{
+				admin_password_change admi=new admin_password_change();
+						admi.setVisible(true);
+				admi.lblNewLabel_2.setText(textField.getText());
+		
+			}
+				else {	
 				change_user_pass ch=new change_user_pass();
-				ch.lblNewLabel_2.setText(textField.getText());
-				ch.setVisible(true);
-								
+					ch.lblNewLabel_2.setText(textField.getText());
+					ch.setVisible(true);
+				}
 				
 			}
 		});

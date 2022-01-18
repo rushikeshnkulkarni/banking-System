@@ -33,6 +33,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
@@ -90,6 +91,9 @@ public class admin_page extends JFrame {
 	 private JTable table_1;
 	 private JTextField textField_4;
 	public JLabel lblNewLabel_29;
+	private JTable table_2;
+	private JTextField textField_16;
+	private JTable table_3;
 	/**
 	 * Launch the application.
 	 */
@@ -130,7 +134,9 @@ public class admin_page extends JFrame {
 		JMenuItem mntmNewMenuItem = new JMenuItem("Create new  Admin");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+			
+				new_admin na= new new_admin();
+				na.lblNewLabel_12.setText(lblNewLabel_29.getText());
 				new new_admin().setVisible(true);
 			}
 		});
@@ -449,7 +455,7 @@ public class admin_page extends JFrame {
 		 			try {
 		 				
 		 				con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
-		 				stmt=con.prepareStatement("insert into emp_details (emp_username,emp_password,emp_name,emp_gender,emp_post,emp_mobile,emp_salary,emp_acnumber,emp_mail,address,photo,adhar_photo,join_date) values( ?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		 				stmt=con.prepareStatement("insert into emp_details (emp_username,emp_password,emp_name,emp_gender,emp_post,emp_mobile,emp_salary,emp_acnumber,emp_mail,address,photo,adhar_photo,join_date) values( ?,md5(?),?,?,?,?,?,?,?,?,?,?,?)");
 		 				
 		 				stmt.setString(1,textField_3.getText().trim());
 		 				stmt.setString(2, passwordField_1.getText());
@@ -736,6 +742,28 @@ public class admin_page extends JFrame {
 		 	}
 		 });
 		 table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		 
+		 JButton btnNewButton_13 = new JButton("Print List");
+		 btnNewButton_13.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) {
+		 		
+		 		try {
+		 		
+		 		if(table.print())
+		 		{
+		 			JOptionPane.showMessageDialog(null,"PDF downloaded ","Information",JOptionPane.INFORMATION_MESSAGE);
+		 		}
+		 		} catch (Exception e2) {
+		
+					JOptionPane.showMessageDialog(null,"Data requird","warning",JOptionPane.WARNING_MESSAGE);
+				}
+		 				 		
+		 	}
+		 			 	
+		 });
+		 btnNewButton_13.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		 btnNewButton_13.setBounds(623, 397, 126, 24);
+		 panel_2.add(btnNewButton_13);
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(new Color(0, 255, 255));
@@ -1229,9 +1257,255 @@ public class admin_page extends JFrame {
 		
 		JPanel panel_9 = new JPanel();
 		tabbedPane_2.addTab("Customer list", null, panel_9, null);
+		panel_9.setLayout(null);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		scrollPane_2.setBounds(10, 0, 952, 385);
+		panel_9.add(scrollPane_2);
+		
+		table_2 = new JTable();
+		scrollPane_2.setViewportView(table_2);
+		table_2.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+					 "Account Number", "IFC Code","Full Name", "Gender","Mobile Number","Account Type","Birth Date",    "Adhar Number",  "Address","Created Date"
+			}
+		) {
+			boolean[] columnEditables = new boolean[] {
+					false, false, false, false, false, false, false, false, false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				
+			};
+		
+			
+		});
+		table_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		JButton btnNewButton_10 = new JButton("Show");
+		btnNewButton_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				DefaultTableModel dt1 =(DefaultTableModel)table_2.getModel();
+				while (dt1.getRowCount()>0)
+				{
+		           dt1.removeRow(0);
+					
+				} 
+				
+				try {
+					
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 sta=con.createStatement();
+					 rs=sta.executeQuery("select ac_number,ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,created_date from cus_details");
+					 
+					 while (rs.next()) {
+					
+						 String account_number=String.valueOf(rs.getInt(1));
+						 String ifccode=rs.getString(2);
+						 String fullname=rs.getString(3); 
+						 String gender=rs.getString(4);
+						 String mobile_number=rs.getString(5);
+						 String accountType=rs.getString(6);
+						 String birthdate=rs.getString(7);
+						 String addhar_number=rs.getString(8);
+						 String address=rs.getString(9);
+						 String created_date=rs.getString(10);
+						 String data[]= { account_number, ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,created_date};
+							DefaultTableModel dt =(DefaultTableModel)table_2.getModel();
+							dt.addRow(data);
+					}
+					
+					con.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					 e2.printStackTrace();
+					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
+					
+				}
+				
+			}
+						
+		});
+		btnNewButton_10.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_10.setBounds(281, 395, 98, 28);
+		panel_9.add(btnNewButton_10);
+		
+		JButton btnNewButton_11 = new JButton("Clear");
+		btnNewButton_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				DefaultTableModel dt1 =(DefaultTableModel)table_2.getModel();
+				while (dt1.getRowCount()>0)
+				{
+		           dt1.removeRow(0);
+					
+				} 
+			}
+		});
+		btnNewButton_11.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_11.setBounds(421, 395, 98, 28);
+		panel_9.add(btnNewButton_11);
+		
+		JButton btnNewButton_14 = new JButton("Print");
+		btnNewButton_14.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+	           try {
+					
+					if(	table_2.print())
+					{
+						JOptionPane.showMessageDialog(null,"PDF downloaded ","Information",JOptionPane.INFORMATION_MESSAGE);	 		
+					}
+					
+					}
+				catch (Exception e2)
+					{
+						// TODO: handle exception
+					}			
+				
+				
+				
+			}
+		});
+		btnNewButton_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_14.setBounds(582, 395, 85, 28);
+		panel_9.add(btnNewButton_14);
 		
 		JPanel panel_10 = new JPanel();
 		tabbedPane_2.addTab("Transcation Statement", null, panel_10, null);
+		panel_10.setLayout(null);
+		
+		JLabel lblNewLabel_30 = new JLabel("Enter Account Number :");
+		lblNewLabel_30.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblNewLabel_30.setBounds(39, 24, 186, 25);
+		panel_10.add(lblNewLabel_30);
+		
+		textField_16 = new JTextField();
+		textField_16.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_16.setBounds(274, 29, 186, 19);
+		panel_10.add(textField_16);
+		textField_16.setColumns(10);
+		
+		JButton btnNewButton_12 = new JButton("Show");
+		btnNewButton_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				if(textField_16.getText().trim().isBlank())
+				{
+					JOptionPane.showMessageDialog(null,"Please enter Account Number !","warning",JOptionPane.WARNING_MESSAGE);
+		             textField_16.requestFocusInWindow();
+		             return;
+				}
+				
+				
+				scrollPane_1.setVisible(true);
+				
+				DefaultTableModel dt2 =(DefaultTableModel)table_3.getModel();
+				while (dt2.getRowCount()>0)
+				{
+		           dt2.removeRow(0);
+					
+				} 
+				
+				try {
+					
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 sta=con.createStatement();
+					 rs=sta.executeQuery("select ac_number,credit_amount,credit_date,debit_amount,debit_date,total_amount from transcation where ac_number="+Integer.parseInt(textField_16.getText().trim())+"");
+					 
+					 if(rs.next())
+					 {
+				             textField_16.requestFocusInWindow();
+				             
+					 }
+					 
+					 else {
+						 JOptionPane.showMessageDialog(null,"Please Enter Correct Account Number !","Warning",JOptionPane.WARNING_MESSAGE);
+			             textField_16.requestFocusInWindow();
+						return;
+					}
+					 
+					 while (rs.next()) {
+																
+					String account_no=String.valueOf(rs.getInt(1));
+					String credit_amount=String.valueOf(rs.getInt(2));
+					String credit_date=rs.getString(3);
+					String debit_amount=String.valueOf(rs.getInt(4));
+					String debit_date=rs.getString(5);
+					String total=String.valueOf(rs.getInt(6));
+					
+					 String data[]= { account_no,credit_amount,credit_date,debit_amount,debit_date, total };
+						DefaultTableModel dt3 =(DefaultTableModel)table_3.getModel();
+						dt3.addRow(data);
+					 }
+					
+					 con.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					 e2.printStackTrace();
+					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
+					
+				}
+											
+			}
+		});
+		btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_12.setBounds(543, 24, 96, 25);
+		panel_10.add(btnNewButton_12);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(22, 103, 916, 322);
+		panel_10.add(scrollPane_3);
+		
+		table_3 = new JTable();
+		scrollPane_3.setViewportView(table_3);
+		table_3.setModel(new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"Account Number", "Credit Amount", "Credit Date", "Debit Amount", "Debit Date", "Total Amount"
+				}
+			) {
+				boolean[] columnEditables = new boolean[] {
+					false, false, false, false, false, false
+				};
+				public boolean isCellEditable(int row, int column) {
+					return columnEditables[column];
+				}
+			});
+		table_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		table_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		JButton btnNewButton_15 = new JButton("Print");
+		btnNewButton_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					
+					if(	table_3.print())
+					{
+						JOptionPane.showMessageDialog(null,"PDF downloaded ","Information",JOptionPane.INFORMATION_MESSAGE);	 		
+					}
+					
+				}
+				catch (Exception e2)
+					{
+						// TODO: handle exception
+					}			
+				
+				
+				
+			}
+		});
+		btnNewButton_15.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_15.setBounds(692, 24, 85, 25);
+		panel_10.add(btnNewButton_15);
+		
 		
 		JButton btnNewButton_9 = new JButton("Logout");
 		btnNewButton_9.addActionListener(new ActionListener() {
