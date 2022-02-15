@@ -1238,26 +1238,31 @@ public class homepage extends JFrame {
 		panel_6.setLayout(null);
 		
 		txtEnterAccountNumber = new JTextField();
+		txtEnterAccountNumber.setForeground(Color.LIGHT_GRAY);
 		txtEnterAccountNumber.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
 				
 				if(txtEnterAccountNumber.getText().equals("Enter account number"))
+				{
 					txtEnterAccountNumber.setText("");
-				
+					txtEnterAccountNumber.setForeground(Color.black);
+				}
 				
 			}
 			@Override
 			public void focusLost(FocusEvent e) {
 				
 				if(txtEnterAccountNumber.getText().trim().equals(""))
+				{
 				txtEnterAccountNumber.setText("Enter account number");
-				
+				txtEnterAccountNumber.setForeground(Color.LIGHT_GRAY);
+				}
 			}
 		});
 		txtEnterAccountNumber.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtEnterAccountNumber.setText("Enter account number");	
-		txtEnterAccountNumber.setBounds(22, 156, 176, 24);
+		txtEnterAccountNumber.setBounds(63, 161, 187, 24);
 		panel_6.add(txtEnterAccountNumber);
 		txtEnterAccountNumber.setColumns(10);
 		
@@ -1279,11 +1284,8 @@ public class homepage extends JFrame {
 					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
 					 stmt=con.createStatement();
 					 rs=stmt.executeQuery("select 	ifccode, fullname,gender,accountType,birthdate,addhar_number from cus_details where ac_number="+Integer.parseInt(txtEnterAccountNumber.getText().trim())+"");
-					
-						 JOptionPane.showMessageDialog(null,"please enter correct account number  !","warning",JOptionPane.ERROR_MESSAGE);
-						
 				
-					
+					 
 		     	  	while (rs.next()) {
 		     	         		
 		     	  		ifccode1=rs.getString(1);
@@ -1292,32 +1294,33 @@ public class homepage extends JFrame {
 		     	  		accountType=rs.getString(4);
 		     	  		birthdate=rs.getString(5);
 		     	  		addhar_number=rs.getString(6);
+		     	  		
+		     	  		textArea_2.setText("\t\t"+"     "+" RSD Bank \n");
+						textArea_2.setText(textArea_2.getText()+"================================================================================\n\n");
+						textArea_2.setText(textArea_2.getText()+"name :"+" "+""+fullname+"      \n\n");
+						textArea_2.setText(textArea_2.getText()+"Account Type :"+" "+""+accountType+"    \n\n");
+						textArea_2.setText(textArea_2.getText()+"Account Number :"+" "+""+txtEnterAccountNumber.getText().trim()+"     \t\t photo here\n\n");
+						textArea_2.setText(textArea_2.getText()+"IFC Code :"+" "+""+ifccode+"		\n\n ");
+						textArea_2.setText(textArea_2.getText()+"Birth Date :"+" "+""+birthdate+"    \n\n");
+						textArea_2.setText(textArea_2.getText()+"Gender :"+" "+""+gender+"    \n\n");
+						textArea_2.setText(textArea_2.getText()+"Adhar Number :"+ " "+""+addhar_number+"     \n \n");
+						textArea_2.setText(textArea_2.getText()+"Bank Address : Gandhi chowk,latur-413512.      \n \n");
+						textArea_2.setText(textArea_2.getText()+"\n\n\t\t\t\t singnature");
+						textArea_2.setText(textArea_2.getText()+"\n\n================================================================================");
+										
 						
 					}		
 					 
+		     	  	if(textArea_2.getText().isBlank())
+		     	  	{
+		     	  		JOptionPane.showMessageDialog(null,"please enter correct account number","warning",JOptionPane.WARNING_MESSAGE);
+		     	  	}
 		     	  	
 		     	  	
 				} catch (Exception e2) {
 					// TODO: handle exception
 					e2.printStackTrace();
 				}
-				
-				
-				
-				
-				textArea_2.setText("\t\t"+"     "+" RSD Bank \n");
-				textArea_2.setText(textArea_2.getText()+"================================================================================\n\n");
-				textArea_2.setText(textArea_2.getText()+"name :"+" "+""+fullname+"      \n\n");
-				textArea_2.setText(textArea_2.getText()+"Account Type :"+" "+""+accountType+"    \n\n");
-				textArea_2.setText(textArea_2.getText()+"Account Number :"+" "+""+txtEnterAccountNumber.getText().trim()+"     \t\t photo here\n\n");
-				textArea_2.setText(textArea_2.getText()+"IFC Code :"+" "+""+ifccode+"		\n\n ");
-				textArea_2.setText(textArea_2.getText()+"Birth Date :"+" "+""+birthdate+"    \n\n");
-				textArea_2.setText(textArea_2.getText()+"Gender :"+" "+""+gender+"    \n\n");
-				textArea_2.setText(textArea_2.getText()+"Adhar Number :"+ " "+""+addhar_number+"     \n \n");
-				textArea_2.setText(textArea_2.getText()+"Bank Address : Gandhi chowk,latur-413512.      \n \n");
-				textArea_2.setText(textArea_2.getText()+"\n\n\t\t\t\t singnature");
-				textArea_2.setText(textArea_2.getText()+"\n\n================================================================================");
-								
 			}
 		});
 		btnNewButton_15.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
@@ -1339,9 +1342,14 @@ public class homepage extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				try {
-					textArea_2.print();
+					if(textArea_2.print())
+					{
+						JOptionPane.showMessageDialog(null,"pdf download !","Information",JOptionPane.INFORMATION_MESSAGE);
+		     	  	
+					}
 				} catch (Exception e2) {
 					// TODO: handle exception
+					e2.printStackTrace();
 				}
 			}
 		});

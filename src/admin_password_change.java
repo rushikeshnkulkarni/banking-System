@@ -43,7 +43,7 @@ public class admin_password_change extends JFrame {
 	 */
 	public admin_password_change() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 507, 372);
+		setBounds(100, 100, 507, 301);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -205,11 +205,8 @@ public class admin_password_change extends JFrame {
 		btnNewButton.setBounds(228, 200, 173, 21);
 		contentPane.add(btnNewButton);
 		
-		JButton btnNewButton_2 = new JButton("New button");
-		btnNewButton_2.setBounds(53, 244, 104, 49);
-		contentPane.add(btnNewButton_2);
-		
 		lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setVisible(false);
 		lblNewLabel_2.setBounds(116, 20, 45, 13);
 		contentPane.add(lblNewLabel_2);
 	}

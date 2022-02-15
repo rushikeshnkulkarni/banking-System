@@ -24,6 +24,8 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Random;
 import javax.swing.border.MatteBorder;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class login_page extends JFrame {
 
@@ -77,24 +79,37 @@ public class login_page extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-     	JLabel lblNewLabel = new JLabel("username :");
+     	JLabel lblNewLabel = new JLabel("");
+     	lblNewLabel.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\User-blue-icon.png"));
 		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNewLabel.setBounds(55, 69, 98, 40);
+		lblNewLabel.setBounds(93, 63, 48, 68);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("password :");
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Apps-Lock-icon.png"));
 		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(55, 153, 98, 37);
+		lblNewLabel_1.setBounds(93, 157, 63, 48);
 		contentPane.add(lblNewLabel_1);
 		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		passwordField.setBounds(183, 157, 190, 30);
+		passwordField.setBounds(183, 169, 190, 30);
 		contentPane.add(passwordField);
 		
 		txtEnterUsername = new JTextField();
+		txtEnterUsername.setForeground(Color.LIGHT_GRAY);
+		txtEnterUsername.setText("Enter username");
+		txtEnterUsername.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtEnterUsername.setText("");
+				
+				
+			}
+		});
+		txtEnterUsername.setToolTipText("Enter username");
 		txtEnterUsername.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtEnterUsername.setBounds(183, 79, 190, 30);
+		txtEnterUsername.setBounds(183, 87, 190, 30);
 		contentPane.add(txtEnterUsername);
 		txtEnterUsername.setColumns(10);
 	
@@ -103,7 +118,7 @@ public class login_page extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
-				if(txtEnterUsername.getText().trim().isBlank())
+				if(txtEnterUsername.getText().trim().isBlank()||txtEnterUsername.getText().equals("Enter username"))
 				{
 					JOptionPane.showMessageDialog(null,"please enter username !","warning",JOptionPane.WARNING_MESSAGE);
 					txtEnterUsername.requestFocusInWindow();
@@ -168,7 +183,7 @@ public class login_page extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(txtEnterUsername.getText().trim().isBlank())
+				if(txtEnterUsername.getText().trim().isBlank()||txtEnterUsername.getText().equals("Enter username"))
 				{
 					JOptionPane.showMessageDialog(null,"please enter username !","warning",JOptionPane.WARNING_MESSAGE);
 					txtEnterUsername.requestFocusInWindow();
