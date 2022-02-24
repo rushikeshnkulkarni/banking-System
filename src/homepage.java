@@ -49,7 +49,6 @@ public class homepage extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
-	public JLabel lblNewLabel_27;
 	/**
 	 * Launch the application.
 	 */
@@ -68,6 +67,7 @@ public class homepage extends JFrame {
 	private JTextField textField_15;
 	private JTextField textField_16;
 	private JTable table;
+	JLabel lblNewLabel_27;
 	JLabel lblNewLabel_25;
 	JLabel lblNewLabel_29;
 	JComboBox comboBox_1 ;
@@ -102,7 +102,7 @@ public class homepage extends JFrame {
 			
 		setTitle("homepage");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1020, 569);
+		setBounds(100, 100, 1073, 681);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -110,93 +110,209 @@ public class homepage extends JFrame {
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(204, 0, 204), new Color(255, 102, 0), new Color(255, 0, 102), new Color(255, 51, 0)), null));
-		tabbedPane.setBounds(10, 34, 986, 488);
+		tabbedPane.setBounds(10, 52, 1054, 592);
 		contentPane.add(tabbedPane);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(173, 216, 230));
+		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tabbedPane.addTab("Cradit ammount", null, panel_1, null);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_10 = new JLabel("Enter Account Number");
+		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_10.setBounds(102, 132, 285, 35);
+		panel_1.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_11 = new JLabel("Enter ammount");
+		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_11.setBounds(102, 239, 210, 35);
+		panel_1.add(lblNewLabel_11);
+		
+		textField_4 = new JTextField();
+		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_4.setBounds(470, 132, 258, 41);
+		panel_1.add(textField_4);
+		textField_4.setColumns(10);
+		
+		textField_5 = new JTextField();
+		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_5.setBounds(470, 237, 258, 41);
+		panel_1.add(textField_5);
+		textField_5.setColumns(10);
+		
+		JButton btnNewButton_3 = new JButton("Credit Amount");
+		btnNewButton_3.setForeground(new Color(0, 0, 0));
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				if(textField_4.getText().trim().isBlank())
+				{
+					JOptionPane.showMessageDialog(null,"Please enter Account Number !","warning",JOptionPane.WARNING_MESSAGE);
+		             textField_4.requestFocusInWindow();
+		             return;
+				}
+				
+				if(textField_5.getText().trim().isBlank())
+				{
+					JOptionPane.showMessageDialog(null,"Please enter Amount !","warning",JOptionPane.WARNING_MESSAGE);
+		             textField_5.requestFocusInWindow();
+		             return;
+				}
+				
+							
+		        try {
+		    
+		        	
+		       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+				 stmt=con.createStatement();
+				 rs=stmt.executeQuery("select ac_number from cus_details where ac_number="+Long.parseLong(textField_4.getText().trim())+"");
+		   
+				 if(rs.next())
+				 {
+					 JOptionPane.showMessageDialog(null,"correct account number !","information",JOptionPane.INFORMATION_MESSAGE);
+					
+				 }
+				 else {
+					 JOptionPane.showMessageDialog(null,"please enter correct account number !","warning",JOptionPane.WARNING_MESSAGE);
+					 return;
+				}
+				 rs=stmt.executeQuery("select total_amount from transcation where ac_number="+Integer.parseInt(textField_4.getText().trim())+"");
+			
+				 while (rs.next())
+	    	    	 {				
+					   tot=rs.getFloat("total_amount");
+					}
+							
+					float dd=Float.parseFloat(textField_5.getText().trim());
+					   float ee= tot+dd;
+					   PreparedStatement stm=con.prepareStatement("insert into transcation (ac_number,credit_amount,credit_date,total_amount) values(?,?,?,?)");
+					Integer ii=Integer.parseInt(textField_4.getText().trim());
+					stm.setInt(1,ii);
+				stm.setFloat(2, Float.parseFloat(textField_5.getText()));	
+		
+					LocalDateTime dt=LocalDateTime.now();
+					stm.setString(3, dt.toString());
+			
+					   stm.setFloat(4, ee);
+					   int xx=stm.executeUpdate();
+					   if(xx>=1)
+					   {
+							 JOptionPane.showMessageDialog(null,"Amount credited !","warning",JOptionPane.INFORMATION_MESSAGE);
+							 textField_4.setText("");
+							 textField_5.setText("");
+						
+					   }
+					  	 
+					
+				 else
+				 {
+					 JOptionPane.showMessageDialog(null,"ammount not credited !","warning",JOptionPane.INFORMATION_MESSAGE);
+					 return;	 
+		       	}
+					   
+					   con.close();
+					   
+				} catch (Exception e2) {
+					// TODO: handle exception
+					 e2.printStackTrace();
+					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
+
+				}
+								
+			}
+		});
+		btnNewButton_3.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnNewButton_3.setBounds(276, 366, 192, 51);
+		panel_1.add(btnNewButton_3);
+		
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(173, 216, 230));
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		tabbedPane.addTab("New Account", null, panel, null);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Full Name");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(10, 21, 71, 34);
+		lblNewLabel.setBounds(24, 43, 124, 34);
 		panel.add(lblNewLabel);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField.setBounds(130, 21, 230, 34);
+		textField.setBounds(263, 39, 230, 34);
 		panel.add(textField);
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Gender");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_1.setBounds(10, 80, 71, 34);
+		lblNewLabel_1.setBounds(24, 98, 108, 34);
 		panel.add(lblNewLabel_1);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"<-select gender->", "Male ", "Female", "other"}));
-		comboBox.setBounds(130, 83, 173, 29);
+		comboBox.setBounds(263, 101, 173, 29);
 		panel.add(comboBox);
 		
 		JLabel lblNewLabel_2 = new JLabel("Mobile Number");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(10, 140, 124, 29);
+		lblNewLabel_2.setBounds(24, 165, 124, 29);
 		panel.add(lblNewLabel_2);
 		
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_1.setBounds(130, 140, 212, 26);
+		textField_1.setBounds(262, 166, 212, 26);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Birth date");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_3.setBounds(10, 242, 90, 27);
+		lblNewLabel_3.setBounds(24, 276, 90, 27);
 		panel.add(lblNewLabel_3);
 		
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_2.setBounds(130, 242, 144, 25);
+		textField_2.setBounds(261, 280, 144, 25);
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("Aadhar Number");
 		lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_4.setBounds(10, 293, 124, 26);
+		lblNewLabel_4.setBounds(24, 329, 124, 26);
 		panel.add(lblNewLabel_4);
 		
 		textField_3 = new JTextField();
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_3.setBounds(130, 294, 173, 25);
+		textField_3.setBounds(263, 340, 173, 25);
 		panel.add(textField_3);
 		textField_3.setColumns(10);
 		
 		JLabel lblNewLabel_5 = new JLabel("Address");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_5.setBounds(12, 357, 108, 29);
+		lblNewLabel_5.setBounds(24, 400, 108, 29);
 		panel.add(lblNewLabel_5);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setFont(new Font("Arial", Font.PLAIN, 16));
 		textArea.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		textArea.setBounds(130, 347, 153, 76);
+		textArea.setBounds(263, 404, 153, 76);
 		panel.add(textArea);
 		
 		JLabel lblNewLabel_6 = new JLabel("Photo");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_6.setBounds(439, 21, 101, 34);
+		lblNewLabel_6.setBounds(666, 36, 101, 34);
 		panel.add(lblNewLabel_6);
 		
 		JLabel lblNewLabel_7 = new JLabel("");
 		lblNewLabel_7.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		lblNewLabel_7.setBounds(609, 21, 190, 154);
+		lblNewLabel_7.setBounds(806, 38, 190, 154);
 		panel.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("");
 		lblNewLabel_8.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		lblNewLabel_8.setBounds(609, 232, 190, 154);
+		lblNewLabel_8.setBounds(814, 280, 190, 154);
 		panel.add(lblNewLabel_8);
 		
 		JButton btnNewButton = new JButton("Upload photo");
@@ -221,7 +337,7 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.setBounds(419, 105, 121, 34);
+		btnNewButton.setBounds(657, 101, 121, 34);
 		panel.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Upload  adhar ");
@@ -245,7 +361,7 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		btnNewButton_1.setBounds(419, 286, 131, 34);
+		btnNewButton_1.setBounds(656, 356, 131, 34);
 		panel.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Submit");
@@ -361,18 +477,18 @@ public class homepage extends JFrame {
 	
 			}
 		});
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_2.setBounds(369, 378, 124, 57);
+		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_2.setBounds(473, 508, 124, 43);
 		panel.add(btnNewButton_2);
 		
 		JLabel lblNewLabel_9 = new JLabel("Account Type");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_9.setBounds(10, 192, 110, 26);
+		lblNewLabel_9.setBounds(24, 220, 110, 26);
 		panel.add(lblNewLabel_9);
 		
 		JLabel lblNewLabel_12 = new JLabel("Addhar Card");
 		lblNewLabel_12.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel_12.setBounds(419, 242, 121, 22);
+		lblNewLabel_12.setBounds(659, 281, 121, 22);
 		panel.add(lblNewLabel_12);
 		
 		comboBox_1 = new JComboBox();
@@ -382,126 +498,14 @@ public class homepage extends JFrame {
 		});
 		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"<- select account Type->", "Saving ", "Current"}));
-		comboBox_1.setBounds(130, 192, 173, 26);
+		comboBox_1.setBounds(263, 220, 173, 26);
 		panel.add(comboBox_1);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tabbedPane.addTab("Cradit ammount", null, panel_1, null);
-		panel_1.setLayout(null);
-		
-		JLabel lblNewLabel_10 = new JLabel("Enter Account Number");
-		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_10.setBounds(175, 132, 183, 35);
-		panel_1.add(lblNewLabel_10);
-		
-		JLabel lblNewLabel_11 = new JLabel("Enter ammount");
-		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_11.setBounds(217, 204, 128, 35);
-		panel_1.add(lblNewLabel_11);
-		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_4.setBounds(416, 136, 199, 27);
-		panel_1.add(textField_4);
-		textField_4.setColumns(10);
-		
-		textField_5 = new JTextField();
-		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_5.setBounds(416, 210, 199, 27);
-		panel_1.add(textField_5);
-		textField_5.setColumns(10);
-		
-		JButton btnNewButton_3 = new JButton("Credit ammount");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				if(textField_4.getText().trim().isBlank())
-				{
-					JOptionPane.showMessageDialog(null,"Please enter Account Number !","warning",JOptionPane.WARNING_MESSAGE);
-		             textField_4.requestFocusInWindow();
-		             return;
-				}
-				
-				if(textField_5.getText().trim().isBlank())
-				{
-					JOptionPane.showMessageDialog(null,"Please enter Amount !","warning",JOptionPane.WARNING_MESSAGE);
-		             textField_5.requestFocusInWindow();
-		             return;
-				}
-				
-							
-		        try {
-		    
-		        	
-		       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
-				 stmt=con.createStatement();
-				 rs=stmt.executeQuery("select ac_number from cus_details where ac_number="+Long.parseLong(textField_4.getText().trim())+"");
-		   
-				 if(rs.next())
-				 {
-					 JOptionPane.showMessageDialog(null,"correct account number !","information",JOptionPane.INFORMATION_MESSAGE);
-					
-				 }
-				 else {
-					 JOptionPane.showMessageDialog(null,"please enter correct account number !","warning",JOptionPane.WARNING_MESSAGE);
-					 return;
-				}
-				 rs=stmt.executeQuery("select total_amount from transcation where ac_number="+Integer.parseInt(textField_4.getText().trim())+"");
-			
-				 while (rs.next())
-	    	    	 {				
-					   tot=rs.getFloat("total_amount");
-					}
-							
-					float dd=Float.parseFloat(textField_5.getText().trim());
-					   float ee= tot+dd;
-					   PreparedStatement stm=con.prepareStatement("insert into transcation (ac_number,credit_amount,credit_date,total_amount) values(?,?,?,?)");
-					Integer ii=Integer.parseInt(textField_4.getText().trim());
-					stm.setInt(1,ii);
-				stm.setFloat(2, Float.parseFloat(textField_5.getText()));	
-		
-					LocalDateTime dt=LocalDateTime.now();
-					stm.setString(3, dt.toString());
-			
-					   stm.setFloat(4, ee);
-					   int xx=stm.executeUpdate();
-					   if(xx>=1)
-					   {
-							 JOptionPane.showMessageDialog(null,"Amount credited !","warning",JOptionPane.INFORMATION_MESSAGE);
-							 textField_4.setText("");
-							 textField_5.setText("");
-						
-					   }
-					  	 
-					
-				 else
-				 {
-					 JOptionPane.showMessageDialog(null,"ammount not credited !","warning",JOptionPane.INFORMATION_MESSAGE);
-					 return;	 
-		       	}
-					   
-					   con.close();
-					   
-				} catch (Exception e2) {
-					// TODO: handle exception
-					 e2.printStackTrace();
-					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
-
-				}
-								
-			}
-		});
-		btnNewButton_3.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		btnNewButton_3.setBounds(367, 325, 166, 35);
-		panel_1.add(btnNewButton_3);
-		
 		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(173, 216, 230));
 		panel_2.setBorder(new LineBorder(new Color(0, 204, 255)));
-		tabbedPane.addTab("Debit Ammount", null, panel_2, null);
-		panel_2.setLayout(null);
+		tabbedPane.addTab("Debit Amount", null, panel_2, null);
+		panel_2.setLayout(null);					
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(488, 6, 1, 1);
@@ -539,23 +543,23 @@ public class homepage extends JFrame {
 		
 		JLabel lblNewLabel_13 = new JLabel("Enter Account Number");
 		lblNewLabel_13.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_13.setBounds(114, 109, 174, 16);
+		lblNewLabel_13.setBounds(83, 109, 205, 51);
 		panel_2.add(lblNewLabel_13);
 		
 		JLabel lblNewLabel_14 = new JLabel("Enter Ammount");
 		lblNewLabel_14.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_14.setBounds(156, 201, 174, 32);
+		lblNewLabel_14.setBounds(83, 206, 174, 51);
 		panel_2.add(lblNewLabel_14);
 		
 		textField_8 = new JTextField();
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_8.setBounds(368, 106, 174, 23);
+		textField_8.setBounds(433, 117, 190, 43);
 		panel_2.add(textField_8);
 		textField_8.setColumns(10);
 		
 		textField_9 = new JTextField();
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_9.setBounds(368, 210, 174, 23);
+		textField_9.setBounds(433, 206, 190, 43);
 		panel_2.add(textField_9);
 		textField_9.setColumns(10);
 		
@@ -651,8 +655,8 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_4.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_4.setBounds(220, 338, 116, 41);
+		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_4.setBounds(199, 338, 116, 41);
 		panel_2.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("Check balance");
@@ -702,141 +706,23 @@ public class homepage extends JFrame {
 			
 		});
 		btnNewButton_5.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_5.setBounds(461, 338, 162, 41);
+		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_5.setBounds(385, 338, 162, 41);
 		panel_2.add(btnNewButton_5);
 		
 		JLabel lblNewLabel_28 = new JLabel("You have required to put minimun 100 rupees balance in your account to continue your Account");
 		lblNewLabel_28.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel_28.setForeground(Color.RED);
-		lblNewLabel_28.setBounds(73, 415, 806, 16);
+		lblNewLabel_28.setBounds(67, 440, 806, 16);
 		panel_2.add(lblNewLabel_28);
 		
 		 lblNewLabel_29 = new JLabel("");
-		lblNewLabel_29.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel_29.setBounds(701, 296, 233, 25);
-		panel_2.add(lblNewLabel_29);
-		
-		JPanel panel_4 = new JPanel();
-		tabbedPane.addTab("Accounts List", null, panel_4, null);
-		panel_4.setLayout(null);
-		
-		JButton btnNewButton_9 = new JButton("show list");
-		btnNewButton_9.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				DefaultTableModel dt1 =(DefaultTableModel)table.getModel();
-				while (dt1.getRowCount()>0)
-				{
-		           dt1.removeRow(0);
-					
-				} 
-				
-				try {
-					
-					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
-					 stmt=con.createStatement();
-					 rs=stmt.executeQuery("select ac_number,ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,created_date from cus_details");
-					 
-					 while (rs.next()) {
-					
-						 String account_number=String.valueOf(rs.getInt(1));
-						 String ifccode=rs.getString(2);
-						 String fullname=rs.getString(3); 
-						 String gender=rs.getString(4);
-						 String mobile_number=rs.getString(5);
-						 String accountType=rs.getString(6);
-						 String birthdate=rs.getString(7);
-						 String addhar_number=rs.getString(8);
-						 String address=rs.getString(9);
-						 String created_date=rs.getString(10);
-						 String data[]= { account_number, ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,created_date};
-							DefaultTableModel dt =(DefaultTableModel)table.getModel();
-							dt.addRow(data);
-					}
-					
-					con.close();
-				} catch (Exception e2) {
-					// TODO: handle exception
-					 e2.printStackTrace();
-					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
-					
-				}
-				
-			}
-		});
-		btnNewButton_9.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnNewButton_9.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_9.setBounds(314, 409, 125, 38);
-		panel_4.add(btnNewButton_9);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
-		scrollPane.setBounds(10, 10, 957, 389);
-		panel_4.add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-					 "Account Number", "IFC Code","Full Name", "Gender","Mobile Number","Account Type","Birth Date",    "Adhar Number",  "Address","Created Date"
-			}
-		) {
-			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false, false, false, false, false
-			};
-			public boolean isCellEditable(int row, int column) {
-				return columnEditables[column];
-			}
-		});
-		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
-		JButton btnNewButton_12 = new JButton("Clear");
-		btnNewButton_12.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				DefaultTableModel dt1 =(DefaultTableModel)table.getModel();
-				while (dt1.getRowCount()>0)
-				{
-		           dt1.removeRow(0);
-					
-				} 
-				
-			}
-		});
-		btnNewButton_12.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_12.setBounds(490, 409, 102, 38);
-		panel_4.add(btnNewButton_12);
-		
-		JButton btnNewButton_17 = new JButton("Print List");
-		btnNewButton_17.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				try {
-					
-					if(	table.print())
-					{
-						JOptionPane.showMessageDialog(null,"PDF downloaded ","Information",JOptionPane.INFORMATION_MESSAGE);	 		
-					}
-					
-					}
-				catch (Exception e2)
-					{
-						// TODO: handle exception
-					}			
-				
-				
-			}
-		});
-		btnNewButton_17.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_17.setBounds(652, 409, 118, 38);
-		panel_4.add(btnNewButton_17);
+		 lblNewLabel_29.setFont(new Font("Tahoma", Font.BOLD, 16));
+		 lblNewLabel_29.setBounds(701, 296, 233, 25);
+		 panel_2.add(lblNewLabel_29);
 		
 		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(new Color(173, 216, 230));
 		tabbedPane.addTab("Transcation Statement", null, panel_5, null);
 		panel_5.setLayout(null);
 		
@@ -847,7 +733,7 @@ public class homepage extends JFrame {
 		
 		textField_17 = new JTextField();
 		textField_17.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_17.setBounds(354, 35, 149, 19);
+		textField_17.setBounds(354, 35, 149, 31);
 		panel_5.add(textField_17);
 		textField_17.setColumns(10);
 		
@@ -916,41 +802,162 @@ public class homepage extends JFrame {
 								
 			}
 		});
-		btnNewButton_11.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_11.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_11.setBounds(596, 30, 106, 31);
 		panel_5.add(btnNewButton_11);
 		
 		 scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVisible(false);
-		scrollPane_1.setBounds(52, 102, 878, 345);
-		panel_5.add(scrollPane_1);
+		 scrollPane_1.setVisible(false);
+		 scrollPane_1.setBounds(52, 102, 878, 345);
+		 panel_5.add(scrollPane_1);
+		 
+		 table_1 = new JTable();
+		 scrollPane_1.setViewportView(table_1);
+		 table_1.setModel(new DefaultTableModel(
+		 	new Object[][] {
+		 	},
+		 	new String[] {
+		 		"Account Number", "Credit Amount", "Credit Date", "Debit Amount", "Debit Date", "Total Amount"
+		 	}
+		 ) {
+		 	boolean[] columnEditables = new boolean[] {
+		 		false, false, false, false, false, false
+		 	};
+		 	public boolean isCellEditable(int row, int column) {
+		 		return columnEditables[column];
+		 	}
+		 });
+		 table_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		 
+		 JButton btnNewButton_14 = new JButton("");
+		 btnNewButton_14.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
+		 btnNewButton_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		 btnNewButton_14.addActionListener(new ActionListener() {
+		 	public void actionPerformed(ActionEvent e) {
+		 	
+		 		try {
+		 			
+		 			if(	table_1.print())
+		 			{
+		 				JOptionPane.showMessageDialog(null,"PDF downloaded ","Information",JOptionPane.INFORMATION_MESSAGE);	 		
+		 			}
+		 			
+		 			}
+		 		catch (Exception e2)
+		 			{
+		 				// TODO: handle exception
+		 			}			
+		 	}
+		 });
+		 btnNewButton_14.setBounds(781, 36, 56, 31);
+		 panel_5.add(btnNewButton_14);
 		
-		table_1 = new JTable();
-		scrollPane_1.setViewportView(table_1);
-		table_1.setModel(new DefaultTableModel(
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(173, 216, 230));
+		tabbedPane.addTab("Accounts List", null, panel_4, null);
+		panel_4.setLayout(null);
+		
+		JButton btnNewButton_9 = new JButton("Show List");
+		btnNewButton_9.setForeground(new Color(0, 0, 0));
+		btnNewButton_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				DefaultTableModel dt1 =(DefaultTableModel)table.getModel();
+				while (dt1.getRowCount()>0)
+				{
+		           dt1.removeRow(0);
+					
+				} 
+				
+				try {
+					
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 stmt=con.createStatement();
+					 rs=stmt.executeQuery("select ac_number,ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,created_date from cus_details");
+					 
+					 while (rs.next()) {
+					
+						 String account_number=String.valueOf(rs.getInt(1));
+						 String ifccode=rs.getString(2);
+						 String fullname=rs.getString(3); 
+						 String gender=rs.getString(4);
+						 String mobile_number=rs.getString(5);
+						 String accountType=rs.getString(6);
+						 String birthdate=rs.getString(7);
+						 String addhar_number=rs.getString(8);
+						 String address=rs.getString(9);
+						 String created_date=rs.getString(10);
+						 String data[]= { account_number, ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,created_date};
+							DefaultTableModel dt =(DefaultTableModel)table.getModel();
+							dt.addRow(data);
+					}
+					
+					con.close();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					 e2.printStackTrace();
+					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
+					
+				}
+				
+			}
+		});
+		btnNewButton_9.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnNewButton_9.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnNewButton_9.setBounds(528, 409, 125, 38);
+		panel_4.add(btnNewButton_9);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
+		scrollPane.setBounds(10, 10, 957, 389);
+		panel_4.add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				"Account Number", "Credit Amount", "Credit Date", "Debit Amount", "Debit Date", "Total Amount"
+					 "Account Number", "IFC Code","Full Name", "Gender","Mobile Number","Account Type","Birth Date",    "Adhar Number",  "Address","Created Date"
 			}
 		) {
 			boolean[] columnEditables = new boolean[] {
-				false, false, false, false, false, false
+				false, false, false, false, false, false, false, false, false, false
 			};
 			public boolean isCellEditable(int row, int column) {
 				return columnEditables[column];
 			}
 		});
-		table_1.setBorder(new LineBorder(new Color(0, 0, 0)));
+		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JButton btnNewButton_14 = new JButton("print");
-		btnNewButton_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_14.addActionListener(new ActionListener() {
+		JButton btnNewButton_12 = new JButton("");
+		btnNewButton_12.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Actions-edit-clear-locationbar-rtl-icon.png"));
+		btnNewButton_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			
+				
+				DefaultTableModel dt1 =(DefaultTableModel)table.getModel();
+				while (dt1.getRowCount()>0)
+				{
+		           dt1.removeRow(0);
+					
+				} 
+				
+			}
+		});
+		btnNewButton_12.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_12.setBounds(695, 409, 42, 35);
+		panel_4.add(btnNewButton_12);
+		
+		JButton btnNewButton_17 = new JButton("");
+		btnNewButton_17.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
+		btnNewButton_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
 				try {
 					
-					if(	table_1.print())
+					if(	table.print())
 					{
 						JOptionPane.showMessageDialog(null,"PDF downloaded ","Information",JOptionPane.INFORMATION_MESSAGE);	 		
 					}
@@ -960,34 +967,38 @@ public class homepage extends JFrame {
 					{
 						// TODO: handle exception
 					}			
+				
+				
 			}
 		});
-		btnNewButton_14.setBounds(760, 30, 99, 31);
-		panel_5.add(btnNewButton_14);
+		btnNewButton_17.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_17.setBounds(773, 409, 52, 38);
+		panel_4.add(btnNewButton_17);
 		
 		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(173, 216, 230));
 		panel_3.setBorder(new CompoundBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)), new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
 		tabbedPane.addTab("Edit Account Details", null, panel_3, null);
 		panel_3.setLayout(null);
 		
 		JLabel lblNewLabel_15 = new JLabel("Name");
 		lblNewLabel_15.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_15.setBounds(28, 73, 83, 13);
+		lblNewLabel_15.setBounds(10, 69, 83, 20);
 		panel_3.add(lblNewLabel_15);
 		
 		JLabel lblNewLabel_16 = new JLabel("Gender");
 		lblNewLabel_16.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_16.setBounds(27, 113, 66, 20);
+		lblNewLabel_16.setBounds(10, 113, 66, 20);
 		panel_3.add(lblNewLabel_16);
 		
 		JLabel lblNewLabel_17 = new JLabel("Mobile Number");
 		lblNewLabel_17.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_17.setBounds(4, 158, 107, 20);
+		lblNewLabel_17.setBounds(10, 158, 107, 20);
 		panel_3.add(lblNewLabel_17);
 		
 		JLabel lblNewLabel_18 = new JLabel("Account Type");
 		lblNewLabel_18.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_18.setBounds(4, 201, 107, 20);
+		lblNewLabel_18.setBounds(10, 201, 107, 20);
 		panel_3.add(lblNewLabel_18);
 		
 		JLabel lblNewLabel_19 = new JLabel("Birth Date");
@@ -1002,48 +1013,48 @@ public class homepage extends JFrame {
 		
 		JLabel lblNewLabel_21 = new JLabel("Address");
 		lblNewLabel_21.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_21.setBounds(10, 350, 103, 25);
+		lblNewLabel_21.setBounds(8, 376, 103, 25);
 		panel_3.add(lblNewLabel_21);
 		
 		textField_10 = new JTextField();
 		textField_10.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_10.setBounds(171, 66, 160, 25);
+		textField_10.setBounds(189, 66, 160, 25);
 		panel_3.add(textField_10);
 		textField_10.setColumns(10);
 		
 		textField_11 = new JTextField();
 		textField_11.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_11.setBounds(171, 110, 160, 25);
+		textField_11.setBounds(189, 110, 160, 25);
 		panel_3.add(textField_11);
 		textField_11.setColumns(10);
 		
 		textField_12 = new JTextField();
 		textField_12.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_12.setBounds(171, 157, 160, 22);
+		textField_12.setBounds(189, 157, 160, 21);
 		panel_3.add(textField_12);
 		textField_12.setColumns(10);
 		
 		textField_13 = new JTextField();
 		textField_13.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_13.setBounds(171, 201, 160, 22);
+		textField_13.setBounds(189, 200, 160, 21);
 		panel_3.add(textField_13);
 		textField_13.setColumns(10);
 		
 		textField_14 = new JTextField();
 		textField_14.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_14.setBounds(171, 252, 160, 24);
+		textField_14.setBounds(189, 252, 160, 24);
 		panel_3.add(textField_14);
 		textField_14.setColumns(10);
 		
 		textField_15 = new JTextField();
 		textField_15.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_15.setBounds(171, 305, 160, 22);
+		textField_15.setBounds(189, 301, 160, 25);
 		panel_3.add(textField_15);
 		textField_15.setColumns(10);
 		
 		JTextArea textArea_1 = new JTextArea();
 		textArea_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		textArea_1.setBounds(171, 359, 135, 88);
+		textArea_1.setBounds(189, 354, 160, 88);
 		panel_3.add(textArea_1);
 		
 		JLabel lblNewLabel_22 = new JLabel("Enter Account Number");
@@ -1053,7 +1064,7 @@ public class homepage extends JFrame {
 		
 		textField_16 = new JTextField();
 		textField_16.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_16.setBounds(171, 26, 170, 25);
+		textField_16.setBounds(189, 23, 160, 25);
 		panel_3.add(textField_16);
 		textField_16.setColumns(10);
 		
@@ -1088,7 +1099,7 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_6.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_6.setBounds(460, 128, 121, 30);
+		btnNewButton_6.setBounds(437, 128, 144, 30);
 		panel_3.add(btnNewButton_6);
 		
 		 lblNewLabel_25 = new JLabel("");
@@ -1122,10 +1133,10 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_7.setBounds(445, 305, 136, 30);
+		btnNewButton_7.setBounds(437, 300, 136, 30);
 		panel_3.add(btnNewButton_7);
 		
-		JButton btnNewButton_8 = new JButton("show");
+		JButton btnNewButton_8 = new JButton("Show");
 		btnNewButton_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -1180,8 +1191,8 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_8.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnNewButton_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_8.setBounds(397, 402, 144, 45);
+		btnNewButton_8.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_8.setBounds(265, 507, 144, 45);
 		panel_3.add(btnNewButton_8);
 		
 		JButton btnNewButton_10 = new JButton("Update");
@@ -1228,12 +1239,13 @@ public class homepage extends JFrame {
 				}				
 			}
 		});
-		btnNewButton_10.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_10.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_10.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnNewButton_10.setBounds(565, 403, 128, 44);
+		btnNewButton_10.setBounds(497, 507, 128, 44);
 		panel_3.add(btnNewButton_10);
 		
 		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(new Color(173, 216, 230));
 		tabbedPane.addTab("Print Passbook", null, panel_6, null);
 		panel_6.setLayout(null);
 		
@@ -1262,7 +1274,7 @@ public class homepage extends JFrame {
 		});
 		txtEnterAccountNumber.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtEnterAccountNumber.setText("Enter account number");	
-		txtEnterAccountNumber.setBounds(63, 161, 187, 24);
+		txtEnterAccountNumber.setBounds(25, 156, 225, 40);
 		panel_6.add(txtEnterAccountNumber);
 		txtEnterAccountNumber.setColumns(10);
 		
@@ -1323,8 +1335,8 @@ public class homepage extends JFrame {
 				}
 			}
 		});
-		btnNewButton_15.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		btnNewButton_15.setBounds(22, 246, 159, 24);
+		btnNewButton_15.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_15.setBounds(25, 246, 149, 40);
 		panel_6.add(btnNewButton_15);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -1337,7 +1349,8 @@ public class homepage extends JFrame {
 		textArea_2.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		textArea_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
-		JButton btnNewButton_16 = new JButton("Print");
+		JButton btnNewButton_16 = new JButton("");
+		btnNewButton_16.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
 		btnNewButton_16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -1354,10 +1367,11 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_16.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_16.setBounds(216, 246, 85, 24);
+		btnNewButton_16.setBounds(217, 251, 53, 35);
 		panel_6.add(btnNewButton_16);
 		
-		JButton btnNewButton_13 = new JButton("Log out");
+		JButton btnNewButton_13 = new JButton("");
+		btnNewButton_13.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Apps-session-logout-icon (1).png"));
 		btnNewButton_13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int a=JOptionPane.showConfirmDialog(null,"Are you sure ?");
@@ -1371,20 +1385,24 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_13.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton_13.setBounds(898, 4, 98, 27);
+		btnNewButton_13.setBounds(1013, 10, 36, 35);
 		contentPane.add(btnNewButton_13);
 		
-	 lblNewLabel_27 = new JLabel("");
-	 lblNewLabel_27.addMouseListener(new MouseAdapter() {
-	 	@Override
-	 	public void mouseClicked(MouseEvent e) {
-	 		profile_page pgPage=new profile_page();
-	 		pgPage.lblNewLabel_8.setText(lblNewLabel_27.getText());
-	 			pgPage.profile(lblNewLabel_27.getText());
-	 	      pgPage.setVisible(true); 		
-	 	}
-	 });
-	 lblNewLabel_27.setBounds(823, 0, 65, 31);
-	 contentPane.add(lblNewLabel_27);
+		 lblNewLabel_27 = new JLabel("");
+		 lblNewLabel_27.addMouseListener(new MouseAdapter() {
+		 	@Override
+		 	public void mouseClicked(MouseEvent e) {
+		 		profile_page pgPage=new profile_page();
+		 		pgPage.lblNewLabel_8.setText(lblNewLabel_27.getText());
+		 			pgPage.profile(lblNewLabel_27.getText());
+		 	      pgPage.setVisible(true); 		
+		 		
+		 		
+		 		
+		 	}
+		 });
+		lblNewLabel_27.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel_27.setBounds(921, 10, 82, 24);
+		contentPane.add(lblNewLabel_27);
 	}
 }

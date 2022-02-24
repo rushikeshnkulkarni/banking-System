@@ -122,7 +122,7 @@ public class admin_page extends JFrame {
 		
 			
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1020, 580);
+		setBounds(100, 100, 1037, 596);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -645,7 +645,7 @@ public class admin_page extends JFrame {
 		 textField_15.setColumns(10);
 		
 		 panel_2 = new JPanel();
-		 panel_2.setBackground(new Color(60, 179, 113));
+		 panel_2.setBackground(new Color(216, 191, 216));
 		 panel_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		 tabbedPane_1.addTab("Employee list", null, panel_2, null);
 		 panel_2.setLayout(null);
@@ -695,8 +695,8 @@ public class admin_page extends JFrame {
 		 	}
 		 });
 		 btnNewButton_3.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		 btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		 btnNewButton_3.setBounds(324, 397, 115, 24);
+		 btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 16));
+		 btnNewButton_3.setBounds(324, 391, 106, 30);
 		 panel_2.add(btnNewButton_3);
 		 
 		 JButton btnNewButton_4 = new JButton("Clear List");
@@ -716,9 +716,9 @@ public class admin_page extends JFrame {
 		 		
 		 	}	 	
 		 });
-		 btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		 btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 16));
 		 btnNewButton_4.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		 btnNewButton_4.setBounds(472, 397, 115, 24);
+		 btnNewButton_4.setBounds(507, 391, 93, 30);
 		 panel_2.add(btnNewButton_4);
 		 
 		 JScrollPane scrollPane = new JScrollPane();
@@ -743,7 +743,8 @@ public class admin_page extends JFrame {
 		 });
 		 table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		 
-		 JButton btnNewButton_13 = new JButton("Print List");
+		 JButton btnNewButton_13 = new JButton("");
+		 btnNewButton_13.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
 		 btnNewButton_13.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 		
@@ -762,11 +763,11 @@ public class admin_page extends JFrame {
 		 			 	
 		 });
 		 btnNewButton_13.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		 btnNewButton_13.setBounds(623, 397, 126, 24);
+		 btnNewButton_13.setBounds(681, 391, 36, 36);
 		 panel_2.add(btnNewButton_13);
 		
 		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(0, 255, 255));
+		panel_3.setBackground(new Color(216, 191, 216));
 		panel_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tabbedPane_1.addTab("make salary", null, panel_3, null);
 		panel_3.setLayout(null);
@@ -844,7 +845,7 @@ public class admin_page extends JFrame {
 			}
 		});
 		btnNewButton_5.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
-		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_5.setBounds(567, 353, 162, 31);
 		panel_3.add(btnNewButton_5);
 		
@@ -976,7 +977,7 @@ public class admin_page extends JFrame {
 		textField_13.setColumns(10);
 		
 		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(new Color(238, 130, 238));
+		panel_7.setBackground(new Color(216, 191, 216));
 		panel_7.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		tabbedPane_1.addTab("update  Information", null, panel_7, null);
 		panel_7.setLayout(null);
@@ -1115,7 +1116,7 @@ public class admin_page extends JFrame {
 				
 			} 		
 		});
-		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_6.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_6.setBounds(785, 142, 118, 42);
 		panel_7.add(btnNewButton_6);
@@ -1176,12 +1177,12 @@ public class admin_page extends JFrame {
 				}			
 			}
 		});
-		btnNewButton_7.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_7.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_7.setBounds(789, 214, 114, 42);
 		panel_7.add(btnNewButton_7);
 		
 		JPanel panel_11 = new JPanel();
-		panel_11.setBackground(new Color(224, 255, 255));
+		panel_11.setBackground(new Color(218, 112, 214));
 		tabbedPane_1.addTab("Dismiss Employee", null, panel_11, null);
 		panel_11.setLayout(null);
 		
@@ -1199,7 +1200,7 @@ public class admin_page extends JFrame {
 		
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_4.setBounds(178, 69, 158, 19);
+		textField_4.setBounds(178, 60, 158, 33);
 		panel_12.add(textField_4);
 		textField_4.setColumns(10);
 		
@@ -1242,7 +1243,7 @@ public class admin_page extends JFrame {
 				
 			}
 		});
-		btnNewButton_8.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_8.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_8.setBounds(128, 165, 104, 33);
 		panel_12.add(btnNewButton_8);
 		
@@ -1251,11 +1252,13 @@ public class admin_page extends JFrame {
 		panel_1.setLayout(null);
 		
 		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane_2.setBackground(new Color(135, 206, 235));
 		tabbedPane_2.setBounds(0, 0, 971, 478);
 		tabbedPane_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		panel_1.add(tabbedPane_2);
 		
 		JPanel panel_9 = new JPanel();
+		panel_9.setBackground(new Color(135, 206, 235));
 		tabbedPane_2.addTab("Customer list", null, panel_9, null);
 		panel_9.setLayout(null);
 		
@@ -1330,7 +1333,7 @@ public class admin_page extends JFrame {
 			}
 						
 		});
-		btnNewButton_10.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_10.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_10.setBounds(281, 395, 98, 28);
 		panel_9.add(btnNewButton_10);
 		
@@ -1346,11 +1349,12 @@ public class admin_page extends JFrame {
 				} 
 			}
 		});
-		btnNewButton_11.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton_11.setFont(new Font("Tahoma", Font.BOLD, 16));
 		btnNewButton_11.setBounds(421, 395, 98, 28);
 		panel_9.add(btnNewButton_11);
 		
-		JButton btnNewButton_14 = new JButton("Print");
+		JButton btnNewButton_14 = new JButton("");
+		btnNewButton_14.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
 		btnNewButton_14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -1372,21 +1376,22 @@ public class admin_page extends JFrame {
 			}
 		});
 		btnNewButton_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_14.setBounds(582, 395, 85, 28);
+		btnNewButton_14.setBounds(589, 395, 43, 28);
 		panel_9.add(btnNewButton_14);
 		
 		JPanel panel_10 = new JPanel();
+		panel_10.setBackground(new Color(135, 206, 235));
 		tabbedPane_2.addTab("Transcation Statement", null, panel_10, null);
 		panel_10.setLayout(null);
 		
 		JLabel lblNewLabel_30 = new JLabel("Enter Account Number :");
-		lblNewLabel_30.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_30.setBounds(39, 24, 186, 25);
+		lblNewLabel_30.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		lblNewLabel_30.setBounds(22, 24, 230, 36);
 		panel_10.add(lblNewLabel_30);
 		
 		textField_16 = new JTextField();
 		textField_16.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_16.setBounds(274, 29, 186, 19);
+		textField_16.setBounds(293, 24, 200, 36);
 		panel_10.add(textField_16);
 		textField_16.setColumns(10);
 		
@@ -1454,8 +1459,8 @@ public class admin_page extends JFrame {
 											
 			}
 		});
-		btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_12.setBounds(543, 24, 96, 25);
+		btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_12.setBounds(543, 24, 96, 36);
 		panel_10.add(btnNewButton_12);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
@@ -1481,7 +1486,8 @@ public class admin_page extends JFrame {
 		table_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		table_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JButton btnNewButton_15 = new JButton("Print");
+		JButton btnNewButton_15 = new JButton("");
+		btnNewButton_15.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
 		btnNewButton_15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -1503,11 +1509,12 @@ public class admin_page extends JFrame {
 			}
 		});
 		btnNewButton_15.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_15.setBounds(692, 24, 85, 25);
+		btnNewButton_15.setBounds(702, 24, 43, 36);
 		panel_10.add(btnNewButton_15);
 		
 		
-		JButton btnNewButton_9 = new JButton("Logout");
+		JButton btnNewButton_9 = new JButton("");
+		btnNewButton_9.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Apps-session-logout-icon (1).png"));
 		btnNewButton_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int a=JOptionPane.showConfirmDialog(null,"Are you sure ?");
@@ -1519,7 +1526,7 @@ public class admin_page extends JFrame {
 			}
 		});
 		btnNewButton_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton_9.setBounds(918, 0, 88, 31);
+		btnNewButton_9.setBounds(943, 0, 53, 34);
 		contentPane.add(btnNewButton_9);
 		
 		 lblNewLabel_29 = new JLabel("");

@@ -138,7 +138,7 @@ public class profile_page extends JFrame {
 	public profile_page() {
 		setTitle("Profile page");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 616, 443);
+		setBounds(100, 100, 719, 476);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -146,7 +146,7 @@ public class profile_page extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("ID :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(171, 145, 33, 20);
+		lblNewLabel.setBounds(143, 131, 56, 20);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Name :");
@@ -156,7 +156,7 @@ public class profile_page extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("Gender :");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_2.setBounds(299, 201, 74, 20);
+		lblNewLabel_2.setBounds(289, 201, 74, 20);
 		contentPane.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Post :\r\n");
@@ -176,7 +176,7 @@ public class profile_page extends JFrame {
 		
 		JLabel lblNewLabel_6 = new JLabel("Address :");
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_6.setBounds(10, 313, 69, 23);
+		lblNewLabel_6.setBounds(21, 313, 69, 23);
 		contentPane.add(lblNewLabel_6);
 		
 		 lblNewLabel_7 = new JLabel("");
@@ -268,7 +268,7 @@ public class profile_page extends JFrame {
 		});
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		lblNewLabel_9.setForeground(new Color(30, 144, 255));
-		lblNewLabel_9.setBounds(289, 368, 268, 20);
+		lblNewLabel_9.setBounds(289, 390, 268, 20);
 		contentPane.add(lblNewLabel_9);
 		mm=lblNewLabel_8.getText();
 

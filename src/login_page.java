@@ -26,6 +26,9 @@ import java.util.Random;
 import javax.swing.border.MatteBorder;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextArea;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class login_page extends JFrame {
 
@@ -42,7 +45,10 @@ public class login_page extends JFrame {
 	  int otp;
 	  Long bb;
 	public  String usname;
-	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_6;
+	private JLabel lblNewLabel_1;
 	/**
 	 * Launch the application.
 	 */
@@ -66,55 +72,59 @@ public class login_page extends JFrame {
 	void timeC()
 	{
 	LocalDate dt=LocalDate.now();
-	lblNewLabel_2.setText(dt.toString());
+	//lblNewLabel_2.setText(dt.toString());
 	}
 	
 	public login_page() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon (1).png"));
+		setBackground(new Color(255, 255, 255));
 	
 		setTitle("Login Page");
-		setBounds(100, 100, 490, 356);
+		setBounds(100, 100, 942, 636);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(0, 0, 0));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
-		
-     	JLabel lblNewLabel = new JLabel("");
-     	lblNewLabel.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\User-blue-icon.png"));
-		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNewLabel.setBounds(93, 63, 48, 68);
-		contentPane.add(lblNewLabel);
-		
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Apps-Lock-icon.png"));
-		lblNewLabel_1.setFont(new Font("Dialog", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(93, 157, 63, 48);
-		contentPane.add(lblNewLabel_1);
-		
+		contentPane.setLayout(null);		
 		passwordField = new JPasswordField();
-		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		passwordField.setBounds(183, 169, 190, 30);
-		contentPane.add(passwordField);
-		
-		txtEnterUsername = new JTextField();
-		txtEnterUsername.setForeground(Color.LIGHT_GRAY);
-		txtEnterUsername.setText("Enter username");
-		txtEnterUsername.addMouseListener(new MouseAdapter() {
+		passwordField.setText("Enter password");
+		passwordField.setForeground(Color.GRAY);
+		passwordField.addFocusListener(new FocusAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				txtEnterUsername.setText("");
+			public void focusGained(FocusEvent e) {
+				passwordField.setText("");
+				passwordField.setForeground(Color.black);
 				
 				
 			}
 		});
+	
+		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		passwordField.setBounds(635, 259, 216, 41);
+		contentPane.add(passwordField);
+		
+		txtEnterUsername = new JTextField();
+		txtEnterUsername.setForeground(Color.GRAY);
+		txtEnterUsername.setText("Enter username");
+		txtEnterUsername.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				
+				txtEnterUsername.setText("");
+				txtEnterUsername.setForeground(Color.black);
+			}
+		});
+	
 		txtEnterUsername.setToolTipText("Enter username");
 		txtEnterUsername.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		txtEnterUsername.setBounds(183, 87, 190, 30);
+		txtEnterUsername.setBounds(635, 175, 216, 41);
 		contentPane.add(txtEnterUsername);
 		txtEnterUsername.setColumns(10);
 	
 		btnNewButton = new JButton("Employee Login");
-		btnNewButton.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		btnNewButton.setForeground(new Color(0, 0, 128));
+		btnNewButton.setBorder(new MatteBorder(10, 8, 2, 2, (Color) new Color(0, 0, 0)));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			
@@ -153,7 +163,7 @@ public class login_page extends JFrame {
 					//	  String pass=passwordField.getText().trim();
 							if(us.equals(a))
 							{
-								JOptionPane.showMessageDialog(null, "login success","info",JOptionPane.INFORMATION_MESSAGE);							 
+						//		JOptionPane.showMessageDialog(null, "login success","info",JOptionPane.INFORMATION_MESSAGE);							 
 							    homepage hp=new homepage();
 							    hp.lblNewLabel_27.setText(txtEnterUsername.getText());
 								   hp.setVisible(true);
@@ -174,12 +184,13 @@ public class login_page extends JFrame {
 				}				
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton.setBounds(55, 243, 150, 40);
+		btnNewButton.setFont(new Font("Cambria", Font.BOLD, 23));
+		btnNewButton.setBounds(511, 375, 183, 48);
 		contentPane.add(btnNewButton);
 		
 		btnNewButton_1 = new JButton("Admin Login");
-		btnNewButton_1.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
+		btnNewButton_1.setForeground(new Color(0, 0, 128));
+		btnNewButton_1.setBorder(new MatteBorder(10, 7, 2, 2, (Color) new Color(0, 0, 0)));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -218,7 +229,7 @@ public class login_page extends JFrame {
 					//	  String pass=passwordField.getText().trim();
 							if(us.equals(a))
 							{
-								JOptionPane.showMessageDialog(null, "login success","info",JOptionPane.INFORMATION_MESSAGE);
+							//	JOptionPane.showMessageDialog(null, "login success","info",JOptionPane.INFORMATION_MESSAGE);
 							
 								admin_page ad= new admin_page();
 								ad.lblNewLabel_29.setText(us);
@@ -238,13 +249,58 @@ public class login_page extends JFrame {
 				}
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_1.setBounds(267, 243, 136, 40);
+		btnNewButton_1.setFont(new Font("Cambria", Font.BOLD, 23));
+		btnNewButton_1.setBounds(724, 375, 151, 48);
 		contentPane.add(btnNewButton_1);
 		
-		lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.setBounds(363, 10, 103, 13);
+		lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Users-Administrator-icon (1).png"));
+		lblNewLabel_3.setBounds(535, 164, 63, 67);
+		contentPane.add(lblNewLabel_3);
+		
+		lblNewLabel_4 = new JLabel("");
+		lblNewLabel_4.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\unlock-icon.png"));
+		lblNewLabel_4.setBounds(534, 259, 69, 41);
+		contentPane.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\bank-icon (1).png"));
+		lblNewLabel.setBounds(10, 20, 48, 51);
+		contentPane.add(lblNewLabel);
+		
+		JLabel lblNewLabel_2 = new JLabel("BANKING  SYSTEM");
+		lblNewLabel_2.setForeground(new Color(255, 0, 0));
+		lblNewLabel_2.setFont(new Font("Stencil", Font.BOLD, 33));
+		lblNewLabel_2.setBackground(new Color(255, 0, 0));
+		lblNewLabel_2.setBounds(68, 20, 349, 48);
 		contentPane.add(lblNewLabel_2);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setFont(new Font("Modern No. 20", Font.PLAIN, 16));
+		textArea.setBackground(new Color(173, 216, 230));
+		textArea.setBounds(427, 10, 488, 581);
+		contentPane.add(textArea);
+		
+		lblNewLabel_6 = new JLabel("Welcome to");
+		lblNewLabel_6.setFont(new Font("Nirmala UI", Font.PLAIN, 32));
+		lblNewLabel_6.setBackground(new Color(255, 255, 224));
+		lblNewLabel_6.setForeground(new Color(255, 255, 224));
+		lblNewLabel_6.setBounds(43, 104, 181, 51);
+		contentPane.add(lblNewLabel_6);
+		
+		lblNewLabel_1 = new JLabel("UniBank");
+		lblNewLabel_1.setForeground(new Color(255, 255, 240));
+		lblNewLabel_1.setFont(new Font("Nirmala UI", Font.BOLD, 32));
+		lblNewLabel_1.setBounds(234, 112, 145, 34);
+		contentPane.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_5 = new JLabel("New label");
+		lblNewLabel_5.setBackground(new Color(255, 255, 240));
+		lblNewLabel_5.setForeground(new Color(255, 255, 240));
+		lblNewLabel_5.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 25));
+		lblNewLabel_5.setIcon(new ImageIcon("C:\\Users\\acer\\Pictures\\gggh.jpg"));
+		lblNewLabel_5.setBounds(10, 10, 407, 581);
+		contentPane.add(lblNewLabel_5);
 			
 	}	
 	}

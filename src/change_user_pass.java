@@ -20,6 +20,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class change_user_pass extends JFrame {
 
@@ -49,15 +50,16 @@ public class change_user_pass extends JFrame {
 	 */
 	public change_user_pass() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 534, 300);
+		setBounds(100, 100, 624, 358);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Enter username or password :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(40, 51, 221, 26);
+		lblNewLabel.setBounds(21, 54, 221, 26);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Conform username or password :");
@@ -67,13 +69,13 @@ public class change_user_pass extends JFrame {
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField.setBounds(293, 57, 188, 19);
+		textField.setBounds(326, 60, 205, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_1.setBounds(293, 140, 188, 19);
+		textField_1.setBounds(326, 143, 205, 26);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -139,8 +141,8 @@ public class change_user_pass extends JFrame {
 				
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		btnNewButton.setBounds(236, 208, 173, 21);
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton.setBounds(319, 233, 185, 38);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Update Username");
@@ -205,8 +207,8 @@ public class change_user_pass extends JFrame {
 					
 			}
 		});
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 15));
-		btnNewButton_1.setBounds(40, 208, 173, 21);
+		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_1.setBounds(84, 233, 192, 38);
 		contentPane.add(btnNewButton_1);
 		
 		lblNewLabel_2 = new JLabel("");

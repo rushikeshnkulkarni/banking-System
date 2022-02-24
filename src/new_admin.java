@@ -73,11 +73,23 @@ public class new_admin extends JFrame {
 	public new_admin() {
 		setTitle("New admin");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 882, 515);
+		setBounds(100, 100, 971, 589);
 		contentPane = new JPanel();
+		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setBackground(new Color(245, 255, 250));
+		lblNewLabel_10.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		lblNewLabel_10.setBounds(492, 252, 126, 134);
+		contentPane.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		lblNewLabel_11.setBounds(711, 252, 131, 134);
+		contentPane.add(lblNewLabel_11);
 		
 		JLabel lblNewLabel = new JLabel("Name :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -106,7 +118,7 @@ public class new_admin extends JFrame {
 		
 		JLabel lblNewLabel_5 = new JLabel("Mail :");
 		lblNewLabel_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_5.setBounds(27, 335, 65, 20);
+		lblNewLabel_5.setBounds(10, 337, 65, 20);
 		contentPane.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Address :");
@@ -116,28 +128,18 @@ public class new_admin extends JFrame {
 		
 		JLabel lblNewLabel_7 = new JLabel("Username :");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_7.setBounds(450, 40, 93, 20);
+		lblNewLabel_7.setBounds(483, 40, 93, 20);
 		contentPane.add(lblNewLabel_7);
 		
 		JLabel lblNewLabel_8 = new JLabel("Password :");
 		lblNewLabel_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_8.setBounds(450, 102, 93, 20);
+		lblNewLabel_8.setBounds(492, 99, 93, 20);
 		contentPane.add(lblNewLabel_8);
 		
 		JLabel lblNewLabel_9 = new JLabel("Conform Password :");
 		lblNewLabel_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_9.setBounds(393, 168, 158, 20);
+		lblNewLabel_9.setBounds(427, 162, 158, 20);
 		contentPane.add(lblNewLabel_9);
-		
-		JLabel lblNewLabel_10 = new JLabel("");
-		lblNewLabel_10.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		lblNewLabel_10.setBounds(456, 228, 126, 134);
-		contentPane.add(lblNewLabel_10);
-		
-		JLabel lblNewLabel_11 = new JLabel("");
-		lblNewLabel_11.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		lblNewLabel_11.setBounds(651, 228, 131, 134);
-		contentPane.add(lblNewLabel_11);
 		
 		JButton btnNewButton = new JButton("Upload photo");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -160,7 +162,7 @@ public class new_admin extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.setBounds(450, 383, 132, 21);
+		btnNewButton.setBounds(486, 415, 132, 38);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Upload adhar");
@@ -184,7 +186,7 @@ public class new_admin extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_1.setBounds(651, 385, 131, 21);
+		btnNewButton_1.setBounds(711, 415, 131, 38);
 		contentPane.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Submit");
@@ -315,65 +317,65 @@ public class new_admin extends JFrame {
 				
 			}
 		});
-		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_2.setBounds(340, 431, 131, 37);
+		btnNewButton_2.setFont(new Font("Tahoma", Font.BOLD, 16));
+		btnNewButton_2.setBounds(354, 494, 151, 48);
 		contentPane.add(btnNewButton_2);
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField.setBounds(146, 43, 186, 19);
+		textField.setBounds(164, 35, 186, 31);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		 comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"<- select gender ->", "Male", "Female", "Other"}));
 		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		comboBox.setBounds(146, 101, 164, 21);
+		comboBox.setBounds(168, 87, 182, 37);
 		contentPane.add(comboBox);
 		
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_1.setBounds(146, 153, 186, 19);
+		textField_1.setBounds(164, 151, 186, 31);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
 		textField_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_2.setBounds(146, 210, 164, 19);
+		textField_2.setBounds(164, 208, 186, 31);
 		contentPane.add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
 		textField_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_3.setBounds(146, 269, 164, 19);
+		textField_3.setBounds(164, 267, 186, 31);
 		contentPane.add(textField_3);
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_4.setBounds(146, 338, 186, 19);
+		textField_4.setBounds(164, 326, 186, 31);
 		contentPane.add(textField_4);
 		textField_4.setColumns(10);
 		
 		 textArea = new JTextArea();
 		textArea.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		textArea.setBounds(120, 383, 163, 85);
+		textArea.setBounds(164, 388, 186, 85);
 		contentPane.add(textArea);
 		
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		textField_5.setBounds(567, 43, 191, 19);
+		textField_5.setBounds(651, 35, 191, 31);
 		contentPane.add(textField_5);
 		textField_5.setColumns(10);
 		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		passwordField.setBounds(567, 102, 191, 19);
+		passwordField.setBounds(651, 94, 191, 31);
 		contentPane.add(passwordField);
 		
 		passwordField_1 = new JPasswordField();
 		passwordField_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		passwordField_1.setBounds(567, 171, 191, 19);
+		passwordField_1.setBounds(651, 163, 191, 31);
 		contentPane.add(passwordField_1);
 		
 		lblNewLabel_12 = new JLabel("");
