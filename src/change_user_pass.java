@@ -21,6 +21,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class change_user_pass extends JFrame {
 
@@ -49,8 +50,9 @@ public class change_user_pass extends JFrame {
 	 * Create the frame.
 	 */
 	public change_user_pass() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon (1).png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 624, 358);
+		setBounds(100, 100, 582, 357);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -69,13 +71,13 @@ public class change_user_pass extends JFrame {
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField.setBounds(326, 60, 205, 26);
+		textField.setBounds(288, 54, 205, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_1.setBounds(326, 143, 205, 26);
+		textField_1.setBounds(288, 137, 205, 26);
 		contentPane.add(textField_1);
 		textField_1.setColumns(10);
 		
@@ -142,7 +144,7 @@ public class change_user_pass extends JFrame {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton.setBounds(319, 233, 185, 38);
+		btnNewButton.setBounds(308, 222, 185, 38);
 		contentPane.add(btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Update Username");
@@ -208,7 +210,7 @@ public class change_user_pass extends JFrame {
 			}
 		});
 		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton_1.setBounds(84, 233, 192, 38);
+		btnNewButton_1.setBounds(69, 222, 192, 38);
 		contentPane.add(btnNewButton_1);
 		
 		lblNewLabel_2 = new JLabel("");

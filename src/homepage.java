@@ -99,6 +99,7 @@ public class homepage extends JFrame {
 	 * Create the frame.
 	 */
 	public homepage() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon.png"));
 			
 		setTitle("homepage");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,121 +114,6 @@ public class homepage extends JFrame {
 		tabbedPane.setBounds(10, 52, 1054, 592);
 		contentPane.add(tabbedPane);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(173, 216, 230));
-		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tabbedPane.addTab("Cradit ammount", null, panel_1, null);
-		panel_1.setLayout(null);
-		
-		JLabel lblNewLabel_10 = new JLabel("Enter Account Number");
-		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_10.setBounds(102, 132, 285, 35);
-		panel_1.add(lblNewLabel_10);
-		
-		JLabel lblNewLabel_11 = new JLabel("Enter ammount");
-		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_11.setBounds(102, 239, 210, 35);
-		panel_1.add(lblNewLabel_11);
-		
-		textField_4 = new JTextField();
-		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_4.setBounds(470, 132, 258, 41);
-		panel_1.add(textField_4);
-		textField_4.setColumns(10);
-		
-		textField_5 = new JTextField();
-		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_5.setBounds(470, 237, 258, 41);
-		panel_1.add(textField_5);
-		textField_5.setColumns(10);
-		
-		JButton btnNewButton_3 = new JButton("Credit Amount");
-		btnNewButton_3.setForeground(new Color(0, 0, 0));
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				
-				if(textField_4.getText().trim().isBlank())
-				{
-					JOptionPane.showMessageDialog(null,"Please enter Account Number !","warning",JOptionPane.WARNING_MESSAGE);
-		             textField_4.requestFocusInWindow();
-		             return;
-				}
-				
-				if(textField_5.getText().trim().isBlank())
-				{
-					JOptionPane.showMessageDialog(null,"Please enter Amount !","warning",JOptionPane.WARNING_MESSAGE);
-		             textField_5.requestFocusInWindow();
-		             return;
-				}
-				
-							
-		        try {
-		    
-		        	
-		       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
-				 stmt=con.createStatement();
-				 rs=stmt.executeQuery("select ac_number from cus_details where ac_number="+Long.parseLong(textField_4.getText().trim())+"");
-		   
-				 if(rs.next())
-				 {
-					 JOptionPane.showMessageDialog(null,"correct account number !","information",JOptionPane.INFORMATION_MESSAGE);
-					
-				 }
-				 else {
-					 JOptionPane.showMessageDialog(null,"please enter correct account number !","warning",JOptionPane.WARNING_MESSAGE);
-					 return;
-				}
-				 rs=stmt.executeQuery("select total_amount from transcation where ac_number="+Integer.parseInt(textField_4.getText().trim())+"");
-			
-				 while (rs.next())
-	    	    	 {				
-					   tot=rs.getFloat("total_amount");
-					}
-							
-					float dd=Float.parseFloat(textField_5.getText().trim());
-					   float ee= tot+dd;
-					   PreparedStatement stm=con.prepareStatement("insert into transcation (ac_number,credit_amount,credit_date,total_amount) values(?,?,?,?)");
-					Integer ii=Integer.parseInt(textField_4.getText().trim());
-					stm.setInt(1,ii);
-				stm.setFloat(2, Float.parseFloat(textField_5.getText()));	
-		
-					LocalDateTime dt=LocalDateTime.now();
-					stm.setString(3, dt.toString());
-			
-					   stm.setFloat(4, ee);
-					   int xx=stm.executeUpdate();
-					   if(xx>=1)
-					   {
-							 JOptionPane.showMessageDialog(null,"Amount credited !","warning",JOptionPane.INFORMATION_MESSAGE);
-							 textField_4.setText("");
-							 textField_5.setText("");
-						
-					   }
-					  	 
-					
-				 else
-				 {
-					 JOptionPane.showMessageDialog(null,"ammount not credited !","warning",JOptionPane.INFORMATION_MESSAGE);
-					 return;	 
-		       	}
-					   
-					   con.close();
-					   
-				} catch (Exception e2) {
-					// TODO: handle exception
-					 e2.printStackTrace();
-					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
-
-				}
-								
-			}
-		});
-		btnNewButton_3.setBorder(new EmptyBorder(0, 0, 0, 0));
-		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_3.setBounds(276, 366, 192, 51);
-		panel_1.add(btnNewButton_3);
-		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(173, 216, 230));
 		panel.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
@@ -241,7 +127,7 @@ public class homepage extends JFrame {
 		
 		textField = new JTextField();
 		textField.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField.setBounds(263, 39, 230, 34);
+		textField.setBounds(263, 47, 230, 26);
 		panel.add(textField);
 		textField.setColumns(10);
 		
@@ -501,6 +387,147 @@ public class homepage extends JFrame {
 		comboBox_1.setBounds(263, 220, 173, 26);
 		panel.add(comboBox_1);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(173, 216, 230));
+		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		tabbedPane.addTab("Cradit ammount", null, panel_1, null);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_10 = new JLabel("Enter Account Number");
+		lblNewLabel_10.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_10.setBounds(38, 135, 210, 35);
+		panel_1.add(lblNewLabel_10);
+		
+		JLabel lblNewLabel_11 = new JLabel("Enter ammount");
+		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_11.setBounds(102, 239, 146, 35);
+		panel_1.add(lblNewLabel_11);
+		
+		textField_4 = new JTextField();
+		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_4.setBounds(322, 146, 258, 26);
+		panel_1.add(textField_4);
+		textField_4.setColumns(10);
+		
+		textField_5 = new JTextField();
+		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		textField_5.setBounds(322, 245, 258, 26);
+		panel_1.add(textField_5);
+		textField_5.setColumns(10);
+		
+		JButton btnNewButton_3 = new JButton("Credit Amount");
+		btnNewButton_3.setForeground(new Color(0, 0, 0));
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				if(textField_4.getText().trim().isBlank())
+				{
+					JOptionPane.showMessageDialog(null,"Please enter Account Number !","warning",JOptionPane.WARNING_MESSAGE);
+		             textField_4.requestFocusInWindow();
+		             return;
+				}
+				
+				if(textField_5.getText().trim().isBlank())
+				{
+					JOptionPane.showMessageDialog(null,"Please enter Amount !","warning",JOptionPane.WARNING_MESSAGE);
+		             textField_5.requestFocusInWindow();
+		             return;
+				}
+				
+							
+		        try {
+		    
+		        	
+		       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+				 stmt=con.createStatement();
+				 rs=stmt.executeQuery("select ac_number from cus_details where ac_number="+Long.parseLong(textField_4.getText().trim())+"");
+		   
+				 if(rs.next())
+				 {
+					 JOptionPane.showMessageDialog(null,"correct account number !","information",JOptionPane.INFORMATION_MESSAGE);
+					
+				 }
+				 else {
+					 JOptionPane.showMessageDialog(null,"please enter correct account number !","warning",JOptionPane.WARNING_MESSAGE);
+					 return;
+				}
+				 rs=stmt.executeQuery("select total_amount from transcation where ac_number="+Integer.parseInt(textField_4.getText().trim())+"");
+			
+				 while (rs.next())
+	    	    	 {				
+					   tot=rs.getFloat("total_amount");
+					}
+							
+					float dd=Float.parseFloat(textField_5.getText().trim());
+					   float ee= tot+dd;
+					   PreparedStatement stm=con.prepareStatement("insert into transcation (ac_number,credit_amount,credit_date,total_amount) values(?,?,?,?)");
+					Integer ii=Integer.parseInt(textField_4.getText().trim());
+					stm.setInt(1,ii);
+				stm.setFloat(2, Float.parseFloat(textField_5.getText()));	
+		
+					LocalDateTime dt=LocalDateTime.now();
+					stm.setString(3, dt.toString());
+			
+					   stm.setFloat(4, ee);
+					   int xx=stm.executeUpdate();
+					   if(xx>=1)
+					   {
+							 JOptionPane.showMessageDialog(null,"Amount credited !","warning",JOptionPane.INFORMATION_MESSAGE);
+							 textField_4.setText("");
+							 textField_5.setText("");
+						
+					   }
+					  	 
+					
+				 else
+				 {
+					 JOptionPane.showMessageDialog(null,"ammount not credited !","warning",JOptionPane.INFORMATION_MESSAGE);
+					 return;	 
+		       	}
+					   
+					   con.close();
+					   
+				} catch (Exception e2) {
+					// TODO: handle exception
+					 e2.printStackTrace();
+					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
+
+				}
+								
+			}
+		});
+		btnNewButton_3.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnNewButton_3.setBounds(276, 366, 192, 51);
+		panel_1.add(btnNewButton_3);
+		
+		JButton btnNewButton_18 = new JButton("Check");
+		btnNewButton_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if(textField_4.getText().trim().isBlank())
+				{
+					JOptionPane.showMessageDialog(null,"Please enter Account Number !","warning",JOptionPane.WARNING_MESSAGE);
+		             textField_4.requestFocusInWindow();
+		             return ;
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			}
+		});
+		btnNewButton_18.setBorder(new EmptyBorder(0, 0, 0, 0));
+		btnNewButton_18.setFont(new Font("Tahoma", Font.BOLD, 20));
+		btnNewButton_18.setBounds(506, 366, 120, 51);
+		panel_1.add(btnNewButton_18);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(173, 216, 230));
 		panel_2.setBorder(new LineBorder(new Color(0, 204, 255)));
@@ -543,23 +570,23 @@ public class homepage extends JFrame {
 		
 		JLabel lblNewLabel_13 = new JLabel("Enter Account Number");
 		lblNewLabel_13.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_13.setBounds(83, 109, 205, 51);
+		lblNewLabel_13.setBounds(83, 109, 172, 51);
 		panel_2.add(lblNewLabel_13);
 		
 		JLabel lblNewLabel_14 = new JLabel("Enter Ammount");
 		lblNewLabel_14.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_14.setBounds(83, 206, 174, 51);
+		lblNewLabel_14.setBounds(125, 202, 130, 51);
 		panel_2.add(lblNewLabel_14);
 		
 		textField_8 = new JTextField();
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_8.setBounds(433, 117, 190, 43);
+		textField_8.setBounds(333, 121, 190, 25);
 		panel_2.add(textField_8);
 		textField_8.setColumns(10);
 		
 		textField_9 = new JTextField();
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_9.setBounds(433, 206, 190, 43);
+		textField_9.setBounds(333, 214, 190, 25);
 		panel_2.add(textField_9);
 		textField_9.setColumns(10);
 		

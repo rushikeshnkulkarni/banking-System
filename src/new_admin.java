@@ -34,6 +34,7 @@ import java.sql.PreparedStatement;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class new_admin extends JFrame {
 
@@ -71,6 +72,7 @@ public class new_admin extends JFrame {
 	 * Create the frame.
 	 */
 	public new_admin() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon (1).png"));
 		setTitle("New admin");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 971, 589);

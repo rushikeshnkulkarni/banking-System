@@ -95,8 +95,7 @@ public class login_page extends JFrame {
 			public void focusGained(FocusEvent e) {
 				passwordField.setText("");
 				passwordField.setForeground(Color.black);
-				
-				
+								
 			}
 		});
 	

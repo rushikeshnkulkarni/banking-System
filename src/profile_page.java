@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
 
 public class profile_page extends JFrame {
 
@@ -136,6 +137,7 @@ public class profile_page extends JFrame {
 	 * Create the frame.
 	 */
 	public profile_page() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon (1).png"));
 		setTitle("Profile page");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 719, 476);
@@ -146,7 +148,7 @@ public class profile_page extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("ID :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel.setBounds(143, 131, 56, 20);
+		lblNewLabel.setBounds(155, 145, 56, 20);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Name :");

@@ -16,6 +16,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 public class admin_password_change extends JFrame {
 
@@ -43,6 +44,7 @@ public class admin_password_change extends JFrame {
 	 * Create the frame.
 	 */
 	public admin_password_change() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon (1).png"));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 559, 344);
 		contentPane = new JPanel();
