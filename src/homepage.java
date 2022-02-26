@@ -513,13 +513,7 @@ public class homepage extends JFrame {
 		             return ;
 				}
 				
-				
-				
-				
-				
-				
-				
-				
+			
 				
 			}
 		});
