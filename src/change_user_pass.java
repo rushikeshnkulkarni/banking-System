@@ -122,7 +122,7 @@ public class change_user_pass extends JFrame {
 					}
 					con.close();
 					
-					 }
+					 }             
 					 
 					 else {
 						

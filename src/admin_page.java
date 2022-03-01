@@ -13,6 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.mysql.cj.result.LocalDateTimeValueFactory;
 import com.mysql.cj.x.protobuf.MysqlxCursor.Open.OneOfMessage;
+import com.mysql.cj.x.protobuf.MysqlxNotice.Frame;
 
 import java.awt.Color;
 import javax.swing.JTabbedPane;
@@ -54,6 +55,8 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class admin_page extends JFrame {
 
@@ -118,12 +121,24 @@ public class admin_page extends JFrame {
 	
 	
 	public admin_page() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+	int result=JOptionPane.showConfirmDialog(null, "Are you sure ?","Exit",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+				
+				if(result==JOptionPane.YES_OPTION)
+				{
+					dispose();
+				}
+			}
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon (1).png"));
 		setTitle("Admin Page");
 		
 		
 			
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1037, 596);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -375,7 +390,7 @@ public class admin_page extends JFrame {
 		 		
 		 		if(textField.getText().isBlank())
 		 		{
-		 			JOptionPane.showInternalMessageDialog(null,"Please enter name !","Warning",JOptionPane.WARNING_MESSAGE);
+		 			JOptionPane.showInternalMessageDialog( null,"Please enter name !","Warning",JOptionPane.WARNING_MESSAGE);
 		 			textField.requestFocusInWindow();
 		 			return;
 		 		}

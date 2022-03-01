@@ -29,6 +29,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.JTextArea;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class login_page extends JFrame {
 
@@ -76,6 +78,19 @@ public class login_page extends JFrame {
 	}
 	
 	public login_page() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+	int result=JOptionPane.showConfirmDialog(null, "Are you sure ?","Exit",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+				
+				if(result==JOptionPane.YES_OPTION)
+				{
+					dispose();
+				}
+			}
+		});
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon (1).png"));
 		setBackground(new Color(255, 255, 255));
 	

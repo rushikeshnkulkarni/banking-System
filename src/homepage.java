@@ -41,6 +41,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class homepage extends JFrame {
 
@@ -66,6 +68,14 @@ public class homepage extends JFrame {
 	private JTextField textField_14;
 	private JTextField textField_15;
 	private JTextField textField_16;
+	 JLabel lblNewLabel_35;
+	 JLabel lblNewLabel_36;
+	 JLabel lblNewLabel_37;
+	 JLabel lblNewLabel_38;
+	JLabel lblNewLabel_33;
+	JLabel lblNewLabel_32; 
+	JLabel lblNewLabel_34;
+	JLabel lblNewLabel_31 ;
 	private JTable table;
 	JLabel lblNewLabel_27;
 	JLabel lblNewLabel_25;
@@ -99,10 +109,23 @@ public class homepage extends JFrame {
 	 * Create the frame.
 	 */
 	public homepage() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				
+	int result=JOptionPane.showConfirmDialog(null, "Are you sure ?","Exit",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE);
+				
+				if(result==JOptionPane.YES_OPTION)
+				{
+					dispose();
+				}
+								
+			}
+		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon.png"));
 			
 		setTitle("homepage");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 1073, 681);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -390,7 +413,7 @@ public class homepage extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(173, 216, 230));
 		panel_1.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		tabbedPane.addTab("Cradit ammount", null, panel_1, null);
+		tabbedPane.addTab("Cradit amount", null, panel_1, null);
 		panel_1.setLayout(null);
 		
 		JLabel lblNewLabel_10 = new JLabel("Enter Account Number");
@@ -398,20 +421,20 @@ public class homepage extends JFrame {
 		lblNewLabel_10.setBounds(38, 135, 210, 35);
 		panel_1.add(lblNewLabel_10);
 		
-		JLabel lblNewLabel_11 = new JLabel("Enter ammount");
+		JLabel lblNewLabel_11 = new JLabel("Enter amount");
 		lblNewLabel_11.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_11.setBounds(102, 239, 146, 35);
 		panel_1.add(lblNewLabel_11);
 		
 		textField_4 = new JTextField();
 		textField_4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_4.setBounds(322, 146, 258, 26);
+		textField_4.setBounds(322, 146, 210, 26);
 		panel_1.add(textField_4);
 		textField_4.setColumns(10);
 		
 		textField_5 = new JTextField();
 		textField_5.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_5.setBounds(322, 245, 258, 26);
+		textField_5.setBounds(322, 245, 210, 26);
 		panel_1.add(textField_5);
 		textField_5.setColumns(10);
 		
@@ -499,7 +522,7 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_3.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnNewButton_3.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_3.setBounds(276, 366, 192, 51);
+		btnNewButton_3.setBounds(186, 347, 192, 51);
 		panel_1.add(btnNewButton_3);
 		
 		JButton btnNewButton_18 = new JButton("Check");
@@ -513,14 +536,78 @@ public class homepage extends JFrame {
 		             return ;
 				}
 				
+		    	try {
+					
+
+			       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 stmt=con.createStatement();
+					 rs=stmt.executeQuery("select fullname,addhar_number from cus_details where ac_number="+Long.parseLong(textField_4.getText().trim())+"");
+			   
+		    		if(rs.next())
+		    		{
+		    			lblNewLabel_31.setVisible(true);
+		    			lblNewLabel_32.setVisible(true);
+		    			lblNewLabel_33.setVisible(true);
+		    			lblNewLabel_34.setVisible(true);
+		    			lblNewLabel_33.setText(rs.getString(1));
+		    			lblNewLabel_34.setText(rs.getString(2));
+		    			
+		    			
+		    		}
+		    		
+		    		else {
+						
+		    			JOptionPane.showMessageDialog(null,"Please enter correct Account Number !","warning",JOptionPane.WARNING_MESSAGE);
+			             textField_4.requestFocusInWindow();
+			             return ;
+			             
+					}
+		    		
+		    		
+		    		
+				} catch (Exception e2) {
+					// TODO: handle exception
+					 e2.printStackTrace();
+					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
+
+				}
+				
+				
+				
+				
+				
 			
 				
 			}
 		});
 		btnNewButton_18.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnNewButton_18.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_18.setBounds(506, 366, 120, 51);
+		btnNewButton_18.setBounds(473, 347, 120, 51);
 		panel_1.add(btnNewButton_18);
+		
+		lblNewLabel_31 = new JLabel("Name:");
+		lblNewLabel_31.setVisible(false);
+		lblNewLabel_31.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_31.setBounds(633, 144, 75, 26);
+		panel_1.add(lblNewLabel_31);
+		
+		 lblNewLabel_32 = new JLabel("Adhar Number:");
+		lblNewLabel_32.setVisible(false);
+		lblNewLabel_32.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_32.setBounds(591, 243, 146, 26);
+		panel_1.add(lblNewLabel_32);
+		
+		lblNewLabel_33 = new JLabel("");
+		lblNewLabel_33.setVisible(false);
+		lblNewLabel_33.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_33.setBounds(756, 148, 247, 26);
+		panel_1.add(lblNewLabel_33);
+		
+		lblNewLabel_34 = new JLabel("");
+		lblNewLabel_34.setVisible(false);
+		lblNewLabel_34.setFont(new Font("Tahoma", Font.BOLD, 20));
+		lblNewLabel_34.setBounds(756, 242, 247, 28);
+		panel_1.add(lblNewLabel_34);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBackground(new Color(173, 216, 230));
@@ -563,24 +650,24 @@ public class homepage extends JFrame {
 		panel_1_1.add(btnNewButton_3_1);
 		
 		JLabel lblNewLabel_13 = new JLabel("Enter Account Number");
-		lblNewLabel_13.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_13.setBounds(83, 109, 172, 51);
+		lblNewLabel_13.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_13.setBounds(39, 109, 216, 51);
 		panel_2.add(lblNewLabel_13);
 		
 		JLabel lblNewLabel_14 = new JLabel("Enter Ammount");
-		lblNewLabel_14.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblNewLabel_14.setBounds(125, 202, 130, 51);
+		lblNewLabel_14.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_14.setBounds(93, 202, 162, 51);
 		panel_2.add(lblNewLabel_14);
 		
 		textField_8 = new JTextField();
 		textField_8.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_8.setBounds(333, 121, 190, 25);
+		textField_8.setBounds(314, 123, 190, 25);
 		panel_2.add(textField_8);
 		textField_8.setColumns(10);
 		
 		textField_9 = new JTextField();
 		textField_9.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_9.setBounds(333, 214, 190, 25);
+		textField_9.setBounds(314, 216, 190, 25);
 		panel_2.add(textField_9);
 		textField_9.setColumns(10);
 		
@@ -677,12 +764,70 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_4.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_4.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton_4.setBounds(199, 338, 116, 41);
+		btnNewButton_4.setBounds(166, 320, 116, 41);
 		panel_2.add(btnNewButton_4);
 		
 		JButton btnNewButton_5 = new JButton("Check balance");
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
+				try {
+					
+
+			       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 stmt=con.createStatement();
+					 rs=stmt.executeQuery("select fullname,addhar_number from cus_details where ac_number="+Long.parseLong(textField_8.getText().trim())+"");
+			   
+		    		if(rs.next())
+		    		{
+		    			lblNewLabel_37.setVisible(true);
+		    			lblNewLabel_38.setVisible(true);
+		    			lblNewLabel_35.setVisible(true);
+		    			lblNewLabel_36.setVisible(true);
+		    			lblNewLabel_37.setText(rs.getString(1));
+		    			lblNewLabel_38.setText(rs.getString(2));
+		    			
+		    			
+		    		}
+		    		
+		    		else {
+						
+		    			JOptionPane.showMessageDialog(null,"Please enter correct Account Number !","warning",JOptionPane.WARNING_MESSAGE);
+		    			lblNewLabel_37.setVisible(false);
+		    			lblNewLabel_38.setVisible(false);
+		    			lblNewLabel_35.setVisible(false);
+		    			lblNewLabel_36.setVisible(false);
+			             textField_8.requestFocusInWindow();
+			             return ;
+			             
+					}
+		    		
+		    		
+		    		
+				} catch (Exception e2) {
+					// TODO: handle exception
+					 e2.printStackTrace();
+					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
+
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				
 				try {
 					if(textField_8.getText().trim().isBlank())
@@ -710,6 +855,9 @@ public class homepage extends JFrame {
 						 while (rs.next()) {
 								// tot=rs.getInt("total_amount");
 							   tot=rs.getFloat("total_amount");
+						//	  lblNewLabel_37.setText(rs.getString(2));
+							//  lblNewLabel_38.setText(rs.getString(3));
+							   
 							}
 						 
 						con.close();
@@ -728,7 +876,7 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_5.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_5.setFont(new Font("Tahoma", Font.BOLD, 16));
-		btnNewButton_5.setBounds(385, 338, 162, 41);
+		btnNewButton_5.setBounds(362, 320, 162, 41);
 		panel_2.add(btnNewButton_5);
 		
 		JLabel lblNewLabel_28 = new JLabel("You have required to put minimun 100 rupees balance in your account to continue your Account");
@@ -741,6 +889,30 @@ public class homepage extends JFrame {
 		 lblNewLabel_29.setFont(new Font("Tahoma", Font.BOLD, 16));
 		 lblNewLabel_29.setBounds(701, 296, 233, 25);
 		 panel_2.add(lblNewLabel_29);
+		 
+		 lblNewLabel_35 = new JLabel("Name:");
+		 lblNewLabel_35.setVisible(false);
+		 lblNewLabel_35.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		 lblNewLabel_35.setBounds(638, 122, 67, 25);
+		 panel_2.add(lblNewLabel_35);
+		 
+		 lblNewLabel_36 = new JLabel("Adhar Number:");
+		 lblNewLabel_36.setVisible(false);
+		 lblNewLabel_36.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		 lblNewLabel_36.setBounds(574, 213, 144, 28);
+		 panel_2.add(lblNewLabel_36);
+		 
+		  lblNewLabel_37 = new JLabel("");
+		  lblNewLabel_37.setVisible(false);
+		 lblNewLabel_37.setFont(new Font("Tahoma", Font.BOLD, 20));
+		 lblNewLabel_37.setBounds(740, 120, 295, 28);
+		 panel_2.add(lblNewLabel_37);
+		 
+		  lblNewLabel_38 = new JLabel("");
+		  lblNewLabel_38.setVisible(false);
+		 lblNewLabel_38.setFont(new Font("Tahoma", Font.BOLD, 20));
+		 lblNewLabel_38.setBounds(740, 213, 295, 28);
+		 panel_2.add(lblNewLabel_38);
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(new Color(173, 216, 230));
@@ -1361,14 +1533,8 @@ public class homepage extends JFrame {
 		panel_6.add(btnNewButton_15);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(360, 10, 585, 425);
+		scrollPane_2.setBounds(368, 20, 667, 531);
 		panel_6.add(scrollPane_2);
-		
-		textArea_2 = new JTextArea();
-		textArea_2.setEditable(false);
-		scrollPane_2.setViewportView(textArea_2);
-		textArea_2.setFont(new Font("Monospaced", Font.PLAIN, 15));
-		textArea_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		JButton btnNewButton_16 = new JButton("");
 		btnNewButton_16.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
@@ -1390,6 +1556,13 @@ public class homepage extends JFrame {
 		btnNewButton_16.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
 		btnNewButton_16.setBounds(217, 251, 53, 35);
 		panel_6.add(btnNewButton_16);
+		
+		textArea_2 = new JTextArea();
+		textArea_2.setBounds(368, 20, 667, 531);
+		panel_6.add(textArea_2);
+		textArea_2.setEditable(false);
+		textArea_2.setFont(new Font("Monospaced", Font.PLAIN, 15));
+		textArea_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		
 		JButton btnNewButton_13 = new JButton("");
 		btnNewButton_13.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Apps-session-logout-icon (1).png"));

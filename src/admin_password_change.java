@@ -45,7 +45,7 @@ public class admin_password_change extends JFrame {
 	 */
 	public admin_password_change() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\acer\\Downloads\\bank-icon (1).png"));
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 559, 344);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(135, 206, 235));
