@@ -286,7 +286,7 @@ public class admin_page extends JFrame {
 		 			passwordField_1.setText("");
 		 			textField_3.enable(true);	
 					passwordField.enable(true);
-					passwordField_1.enable(true);
+					passwordField_1.enable(true);  
 
 				}
 		  	}
