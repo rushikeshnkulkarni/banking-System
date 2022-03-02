@@ -92,6 +92,7 @@ public class homepage extends JFrame {
 	private JTextField txtEnterAccountNumber;
 	JTextArea textArea_2;
 	String  ifccode1,fullname,gender,accountType,birthdate,addhar_number ;
+	private JTextField txtEnterAccountNumber_1;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -1097,7 +1098,7 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_9.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnNewButton_9.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_9.setBounds(528, 409, 125, 38);
+		btnNewButton_9.setBounds(275, 430, 125, 38);
 		panel_4.add(btnNewButton_9);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -1139,7 +1140,7 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_12.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_12.setBounds(695, 409, 42, 35);
+		btnNewButton_12.setBounds(458, 430, 42, 35);
 		panel_4.add(btnNewButton_12);
 		
 		JButton btnNewButton_17 = new JButton("");
@@ -1165,7 +1166,7 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_17.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_17.setBounds(773, 409, 52, 38);
+		btnNewButton_17.setBounds(566, 430, 52, 38);
 		panel_4.add(btnNewButton_17);
 		
 		JPanel panel_3 = new JPanel();
@@ -1563,6 +1564,44 @@ public class homepage extends JFrame {
 		textArea_2.setEditable(false);
 		textArea_2.setFont(new Font("Monospaced", Font.PLAIN, 15));
 		textArea_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(new Color(70, 130, 180));
+		tabbedPane.addTab("Delete Account", null, panel_7, null);
+		panel_7.setLayout(null);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		panel_8.setBounds(231, 99, 534, 326);
+		panel_7.add(panel_8);
+		panel_8.setLayout(null);
+		
+		JButton btnNewButton_19 = new JButton("Delete");
+		btnNewButton_19.setBounds(184, 211, 112, 35);
+		panel_8.add(btnNewButton_19);
+		btnNewButton_19.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
+		
+		txtEnterAccountNumber_1 = new JTextField();
+		txtEnterAccountNumber_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		txtEnterAccountNumber_1.setForeground(new Color(128, 128, 128));
+		txtEnterAccountNumber_1.setText("Enter Account Number");
+		txtEnterAccountNumber_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			if(txtEnterAccountNumber_1.getText().equals("Enter Account Number"))
+			{
+					txtEnterAccountNumber_1.setText("");
+					txtEnterAccountNumber_1.setForeground(new Color(0, 0,0));
+			}			
+				
+				
+				
+			}
+		});
+		txtEnterAccountNumber_1.setBounds(144, 112, 225, 19);
+		panel_8.add(txtEnterAccountNumber_1);
+		txtEnterAccountNumber_1.setColumns(10);
 		
 		JButton btnNewButton_13 = new JButton("");
 		btnNewButton_13.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Apps-session-logout-icon (1).png"));
