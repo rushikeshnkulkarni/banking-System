@@ -1577,6 +1577,56 @@ public class homepage extends JFrame {
 		panel_8.setLayout(null);
 		
 		JButton btnNewButton_19 = new JButton("Delete");
+		btnNewButton_19.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				try {
+					
+					if(txtEnterAccountNumber_1.getText().trim().isBlank())
+					{
+						JOptionPane.showMessageDialog(null,"Please enter the account number","Warning",JOptionPane.WARNING_MESSAGE);
+						txtEnterAccountNumber_1.requestFocusInWindow();
+						return;
+					}
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+						
+					PreparedStatement stmt=con.prepareStatement("delete from cus_details where ac_number=?");	 
+						stmt.setLong(1,Long.parseLong(txtEnterAccountNumber_1.getText().trim()));
+					int num =stmt.executeUpdate();
+					con.close();
+					if(num==1)
+					{
+						JOptionPane.showMessageDialog(null,"Account Successfully Deleted","Success",JOptionPane.INFORMATION_MESSAGE);
+					//	txtEnterAccountNumber_1.setText("");
+						
+						try {
+							
+							 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+								
+								PreparedStatement stmt1=con.prepareStatement("delete from transcation where ac_number=?");	 
+									stmt1.setLong(1,Long.parseLong(txtEnterAccountNumber_1.getText().trim()));
+								int num1 =stmt1.executeUpdate();
+							
+								if(num1>=1)
+								{
+									JOptionPane.showMessageDialog(null,"transcation delted","Success",JOptionPane.INFORMATION_MESSAGE);
+									txtEnterAccountNumber_1.setText("");
+								}
+						} catch (Exception e3) {
+							// TODO: handle exception
+							e3.printStackTrace();
+						}
+						
+						
+					}
+					
+				} catch (Exception e2) {
+					// TODO: handle exception
+					e2.printStackTrace();
+				}
+							
+			}
+		});
 		btnNewButton_19.setBounds(184, 211, 112, 35);
 		panel_8.add(btnNewButton_19);
 		btnNewButton_19.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 20));
@@ -1593,10 +1643,7 @@ public class homepage extends JFrame {
 			{
 					txtEnterAccountNumber_1.setText("");
 					txtEnterAccountNumber_1.setForeground(new Color(0, 0,0));
-			}			
-				
-				
-				
+			}						
 			}
 		});
 		txtEnterAccountNumber_1.setBounds(144, 112, 225, 19);
