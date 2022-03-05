@@ -444,7 +444,7 @@ public class homepage extends JFrame {
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				String nString=	lblNewLabel_27.getText();
 				if(textField_4.getText().trim().isBlank())
 				{
 					JOptionPane.showMessageDialog(null,"Please enter Account Number !","warning",JOptionPane.WARNING_MESSAGE);
@@ -485,7 +485,7 @@ public class homepage extends JFrame {
 							
 					float dd=Float.parseFloat(textField_5.getText().trim());
 					   float ee= tot+dd;
-					   PreparedStatement stm=con.prepareStatement("insert into transcation (ac_number,credit_amount,credit_date,total_amount) values(?,?,?,?)");
+					   PreparedStatement stm=con.prepareStatement("insert into transcation (ac_number,credit_amount,credit_date,total_amount,credted_By) values(?,?,?,?,?)");
 					Integer ii=Integer.parseInt(textField_4.getText().trim());
 					stm.setInt(1,ii);
 				stm.setFloat(2, Float.parseFloat(textField_5.getText()));	
@@ -494,6 +494,7 @@ public class homepage extends JFrame {
 					stm.setString(3, dt.toString());
 			
 					   stm.setFloat(4, ee);
+					   stm.setString(5, nString);
 					   int xx=stm.executeUpdate();
 					   if(xx>=1)
 					   {
@@ -676,6 +677,8 @@ public class homepage extends JFrame {
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				String nString=	lblNewLabel_27.getText();
+				
 				if(textField_8.getText().trim().isBlank())
 				{
 					JOptionPane.showMessageDialog(null,"Please enter Account Number !","warning",JOptionPane.WARNING_MESSAGE);
@@ -725,7 +728,7 @@ public class homepage extends JFrame {
 							   return;
 						   }
 					 
-						   PreparedStatement stm=con.prepareStatement("insert into transcation (ac_number,debit_amount,debit_date,total_amount) values(?,?,?,?)");
+						   PreparedStatement stm=con.prepareStatement("insert into transcation (ac_number,debit_amount,debit_date,total_amount,debited_By) values(?,?,?,?,?)");
 							Integer ii=Integer.parseInt(textField_8.getText().trim());
 							stm.setInt(1,ii);
 						stm.setFloat(2, Float.parseFloat(textField_9.getText().trim()));	
@@ -734,6 +737,7 @@ public class homepage extends JFrame {
 							stm.setString(3, dt.toString());
 					
 							   stm.setFloat(4, ee);
+							   stm.setString(5, nString);
 							   int xx=stm.executeUpdate();  
 							   if(xx>=1)
 							   {

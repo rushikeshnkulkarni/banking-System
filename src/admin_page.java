@@ -1438,7 +1438,7 @@ public class admin_page extends JFrame {
 					
 					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
 					 sta=con.createStatement();
-					 rs=sta.executeQuery("select ac_number,credit_amount,credit_date,debit_amount,debit_date,total_amount from transcation where ac_number="+Integer.parseInt(textField_16.getText().trim())+"");
+					 rs=sta.executeQuery("select ac_number,credit_amount,credit_date,debit_amount,debit_date,total_amount,credted_By,debited_By from transcation where ac_number="+Integer.parseInt(textField_16.getText().trim())+"");
 					 
 					 if(rs.next())
 					 {
@@ -1460,8 +1460,10 @@ public class admin_page extends JFrame {
 					String debit_amount=String.valueOf(rs.getInt(4));
 					String debit_date=rs.getString(5);
 					String total=String.valueOf(rs.getInt(6));
+					String credted=rs.getString(7);
+					String debited=rs.getString(8);
 					
-					 String data[]= { account_no,credit_amount,credit_date,debit_amount,debit_date, total };
+					 String data[]= { account_no,credit_amount,credit_date,debit_amount,debit_date, total,credted,debited };
 						DefaultTableModel dt3 =(DefaultTableModel)table_3.getModel();
 						dt3.addRow(data);
 					 }
@@ -1481,7 +1483,7 @@ public class admin_page extends JFrame {
 		panel_10.add(btnNewButton_12);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(22, 103, 916, 322);
+		scrollPane_3.setBounds(0, 103, 962, 322);
 		panel_10.add(scrollPane_3);
 		
 		table_3 = new JTable();
@@ -1490,11 +1492,11 @@ public class admin_page extends JFrame {
 				new Object[][] {
 				},
 				new String[] {
-					"Account Number", "Credit Amount", "Credit Date", "Debit Amount", "Debit Date", "Total Amount"
+					"Account Number", "Credit Amount", "Credit Date", "Debit Amount", "Debit Date", "Total Amount","Credited By","Debited BY"
 				}
 			) {
 				boolean[] columnEditables = new boolean[] {
-					false, false, false, false, false, false
+					false, false, false, false, false, false,false,false
 				};
 				public boolean isCellEditable(int row, int column) {
 					return columnEditables[column];
