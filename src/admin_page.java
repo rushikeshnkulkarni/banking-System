@@ -1408,7 +1408,7 @@ public class admin_page extends JFrame {
 		
 		textField_16 = new JTextField();
 		textField_16.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_16.setBounds(293, 24, 200, 36);
+		textField_16.setBounds(293, 31, 200, 26);
 		panel_10.add(textField_16);
 		textField_16.setColumns(10);
 		
