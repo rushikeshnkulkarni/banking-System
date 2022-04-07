@@ -501,7 +501,8 @@ public class homepage extends JFrame {
 							 JOptionPane.showMessageDialog(null,"Amount credited !","warning",JOptionPane.INFORMATION_MESSAGE);
 							 textField_4.setText("");
 							 textField_5.setText("");
-						
+							 lblNewLabel_33.setText("");
+							 lblNewLabel_34.setText("");					
 					   }
 					  	 
 					
@@ -931,7 +932,7 @@ public class homepage extends JFrame {
 		
 		textField_17 = new JTextField();
 		textField_17.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		textField_17.setBounds(354, 35, 149, 31);
+		textField_17.setBounds(343, 35, 166, 19);
 		panel_5.add(textField_17);
 		textField_17.setColumns(10);
 		
@@ -1086,7 +1087,7 @@ public class homepage extends JFrame {
 						 String address=rs.getString(9);
 						 String created_date=rs.getString(10);
 						 String data[]= { account_number, ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,created_date};
-							DefaultTableModel dt =(DefaultTableModel)table.getModel();
+						DefaultTableModel dt =(DefaultTableModel)table.getModel();
 							dt.addRow(data);
 					}
 					
@@ -1102,12 +1103,12 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_9.setBorder(new EmptyBorder(0, 0, 0, 0));
 		btnNewButton_9.setFont(new Font("Tahoma", Font.BOLD, 20));
-		btnNewButton_9.setBounds(275, 430, 125, 38);
+		btnNewButton_9.setBounds(236, 466, 125, 38);
 		panel_4.add(btnNewButton_9);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setViewportBorder(new LineBorder(new Color(0, 0, 0)));
-		scrollPane.setBounds(10, 10, 957, 389);
+		scrollPane.setBounds(28, 29, 979, 387);
 		panel_4.add(scrollPane);
 		
 		table = new JTable();
@@ -1144,7 +1145,7 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_12.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_12.setBounds(458, 430, 42, 35);
+		btnNewButton_12.setBounds(449, 469, 42, 35);
 		panel_4.add(btnNewButton_12);
 		
 		JButton btnNewButton_17 = new JButton("");
@@ -1170,7 +1171,7 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_17.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_17.setBounds(566, 430, 52, 38);
+		btnNewButton_17.setBounds(567, 466, 52, 38);
 		panel_4.add(btnNewButton_17);
 		
 		JPanel panel_3 = new JPanel();
@@ -1472,7 +1473,7 @@ public class homepage extends JFrame {
 		});
 		txtEnterAccountNumber.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		txtEnterAccountNumber.setText("Enter account number");	
-		txtEnterAccountNumber.setBounds(25, 156, 225, 40);
+		txtEnterAccountNumber.setBounds(25, 170, 225, 26);
 		panel_6.add(txtEnterAccountNumber);
 		txtEnterAccountNumber.setColumns(10);
 		
