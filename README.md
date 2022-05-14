@@ -12,5 +12,5 @@
         Employee information
         Employee account list
         Employee payment
-        Add new employee
-        
+        Add new employee.
+    
