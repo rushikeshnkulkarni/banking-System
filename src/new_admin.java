@@ -266,7 +266,7 @@ public class new_admin extends JFrame {
 				{
 					
 					try {
-						con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+						con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 					PreparedStatement stmt=con.prepareStatement("insert into admin_details (admin_username,admin_password,admin_name,admin_gender,admin_mobile,admin_salary,admin_acnumber,admin_mail,	admin_address,	photo,	adhar_photo,join_date,	joined_by) values(?,md5(?),?,?,?,?,?,?,?,?,?,?,?)");
 						
 						stmt.setString(1, textField_5.getText().trim());

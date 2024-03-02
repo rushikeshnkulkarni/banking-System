@@ -338,7 +338,7 @@ public class homepage extends JFrame {
 				
 				try {
 					
-					con =  DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+					con =  DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 					PreparedStatement ps=con.prepareStatement("insert into cus_details (ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,photo,addhar_photo,createdBy,created_date) values(?,?,?,?,?,?,?,?,?,?,?,?)"); 
 				   ps.setString(1, ifccode);
 				   ps.setString(2,textField.getText().trim() );
@@ -463,7 +463,7 @@ public class homepage extends JFrame {
 		        try {
 		    
 		        	
-		       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+		       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 				 stmt=con.createStatement();
 				 rs=stmt.executeQuery("select ac_number from cus_details where ac_number="+Long.parseLong(textField_4.getText().trim())+"");
 		   
@@ -542,7 +542,7 @@ public class homepage extends JFrame {
 		    	try {
 					
 
-			       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+			       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					 stmt=con.createStatement();
 					 rs=stmt.executeQuery("select fullname,addhar_number from cus_details where ac_number="+Long.parseLong(textField_4.getText().trim())+"");
 			   
@@ -697,7 +697,7 @@ public class homepage extends JFrame {
 				
 				try {
 					
-				 	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+				 	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					 stmt=con.createStatement();
 					 rs=stmt.executeQuery("select ac_number from cus_details where ac_number="+Long.parseLong(textField_8.getText().trim())+"");
 			   
@@ -777,11 +777,16 @@ public class homepage extends JFrame {
 		btnNewButton_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				
+				if(textField_8.getText().trim().isBlank())
+				{
+					JOptionPane.showMessageDialog(null,"Please enter Account Number !","warning",JOptionPane.WARNING_MESSAGE);
+		             textField_8.requestFocusInWindow();
+		             return;
+				}
 				try {
 					
 
-			       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+			       	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					 stmt=con.createStatement();
 					 rs=stmt.executeQuery("select fullname,addhar_number from cus_details where ac_number="+Long.parseLong(textField_8.getText().trim())+"");
 			   
@@ -816,24 +821,7 @@ public class homepage extends JFrame {
 					 e2.printStackTrace();
 					 JOptionPane.showMessageDialog(null,"Something went wrong !","warning",JOptionPane.ERROR_MESSAGE);
 
-				}
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				}	
 				
 				try {
 					if(textField_8.getText().trim().isBlank())
@@ -842,7 +830,7 @@ public class homepage extends JFrame {
 			             textField_8.requestFocusInWindow();
 			             return;
 					}  
-			        	 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+			        	 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 						 stmt=con.createStatement();
 						 rs=stmt.executeQuery("select ac_number from cus_details where ac_number="+Long.parseLong(textField_8.getText().trim())+"");
 				   
@@ -959,7 +947,7 @@ public class homepage extends JFrame {
 				
 				try {
 					
-					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					 stmt=con.createStatement();
 					 rs=stmt.executeQuery("select ac_number,credit_amount,credit_date,debit_amount,debit_date,total_amount from transcation where ac_number="+Integer.parseInt(textField_17.getText().trim())+"");
 					 
@@ -1028,9 +1016,9 @@ public class homepage extends JFrame {
 		 });
 		 table_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		 
-		 JButton btnNewButton_14 = new JButton("");
+		 JButton btnNewButton_14 = new JButton("print");
 		 btnNewButton_14.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
-		 btnNewButton_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
+		 btnNewButton_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 		 btnNewButton_14.addActionListener(new ActionListener() {
 		 	public void actionPerformed(ActionEvent e) {
 		 	
@@ -1048,7 +1036,7 @@ public class homepage extends JFrame {
 		 			}			
 		 	}
 		 });
-		 btnNewButton_14.setBounds(781, 36, 56, 31);
+		 btnNewButton_14.setBounds(876, 472, 74, 19);
 		 panel_5.add(btnNewButton_14);
 		
 		JPanel panel_4 = new JPanel();
@@ -1070,7 +1058,7 @@ public class homepage extends JFrame {
 				
 				try {
 					
-					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					 stmt=con.createStatement();
 					 rs=stmt.executeQuery("select ac_number,ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,created_date from cus_details");
 					 
@@ -1129,7 +1117,7 @@ public class homepage extends JFrame {
 		});
 		table.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JButton btnNewButton_12 = new JButton("");
+		JButton btnNewButton_12 = new JButton("clear");
 		btnNewButton_12.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Actions-edit-clear-locationbar-rtl-icon.png"));
 		btnNewButton_12.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1145,10 +1133,10 @@ public class homepage extends JFrame {
 		});
 		btnNewButton_12.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		btnNewButton_12.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_12.setBounds(449, 469, 42, 35);
+		btnNewButton_12.setBounds(449, 469, 89, 35);
 		panel_4.add(btnNewButton_12);
 		
-		JButton btnNewButton_17 = new JButton("");
+		JButton btnNewButton_17 = new JButton("print");
 		btnNewButton_17.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
 		btnNewButton_17.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1171,7 +1159,7 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_17.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_17.setBounds(567, 466, 52, 38);
+		btnNewButton_17.setBounds(567, 469, 81, 35);
 		panel_4.add(btnNewButton_17);
 		
 		JPanel panel_3 = new JPanel();
@@ -1349,7 +1337,7 @@ public class homepage extends JFrame {
 				
 				try {
 					
-					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					 stmt=con.createStatement();
 					 rs=stmt.executeQuery("select fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,photo,addhar_photo from cus_details where ac_number="+Integer.parseInt(textField_16.getText().trim())+"");
 		     	  					 
@@ -1400,7 +1388,7 @@ public class homepage extends JFrame {
 				
 				try {
 					
-					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					
 					PreparedStatement stmt=con.prepareStatement("update cus_details set fullname=?,gender=?,mobile_number=?,accountType=?,birthdate=?,addhar_number=?,address=?,photo=?,addhar_photo=? where ac_number=?");	 
 					
@@ -1492,7 +1480,7 @@ public class homepage extends JFrame {
 					
 				try {
 
-					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					 stmt=con.createStatement();
 					 rs=stmt.executeQuery("select 	ifccode, fullname,gender,accountType,birthdate,addhar_number from cus_details where ac_number="+Integer.parseInt(txtEnterAccountNumber.getText().trim())+"");
 				
@@ -1542,7 +1530,7 @@ public class homepage extends JFrame {
 		scrollPane_2.setBounds(368, 20, 667, 531);
 		panel_6.add(scrollPane_2);
 		
-		JButton btnNewButton_16 = new JButton("");
+		JButton btnNewButton_16 = new JButton("print");
 		btnNewButton_16.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
 		btnNewButton_16.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1560,7 +1548,7 @@ public class homepage extends JFrame {
 			}
 		});
 		btnNewButton_16.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_16.setBounds(217, 251, 53, 35);
+		btnNewButton_16.setBounds(217, 251, 85, 35);
 		panel_6.add(btnNewButton_16);
 		
 		textArea_2 = new JTextArea();
@@ -1593,7 +1581,7 @@ public class homepage extends JFrame {
 						txtEnterAccountNumber_1.requestFocusInWindow();
 						return;
 					}
-					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 						
 					PreparedStatement stmt=con.prepareStatement("delete from cus_details where ac_number=?");	 
 						stmt.setLong(1,Long.parseLong(txtEnterAccountNumber_1.getText().trim()));
@@ -1606,7 +1594,7 @@ public class homepage extends JFrame {
 						
 						try {
 							
-							 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+							 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 								
 								PreparedStatement stmt1=con.prepareStatement("delete from transcation where ac_number=?");	 
 									stmt1.setLong(1,Long.parseLong(txtEnterAccountNumber_1.getText().trim()));
@@ -1655,7 +1643,7 @@ public class homepage extends JFrame {
 		panel_8.add(txtEnterAccountNumber_1);
 		txtEnterAccountNumber_1.setColumns(10);
 		
-		JButton btnNewButton_13 = new JButton("");
+		JButton btnNewButton_13 = new JButton("logout");
 		btnNewButton_13.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Apps-session-logout-icon (1).png"));
 		btnNewButton_13.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1669,8 +1657,8 @@ public class homepage extends JFrame {
 
 			}
 		});
-		btnNewButton_13.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton_13.setBounds(1013, 10, 36, 35);
+		btnNewButton_13.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton_13.setBounds(976, 10, 73, 35);
 		contentPane.add(btnNewButton_13);
 		
 		 lblNewLabel_27 = new JLabel("");
@@ -1687,7 +1675,7 @@ public class homepage extends JFrame {
 		 	}
 		 });
 		lblNewLabel_27.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel_27.setBounds(921, 10, 82, 24);
+		lblNewLabel_27.setBounds(877, 18, 82, 24);
 		contentPane.add(lblNewLabel_27);
 	}
 }

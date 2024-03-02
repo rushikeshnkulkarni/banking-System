@@ -99,7 +99,7 @@ public class admin_password_change extends JFrame {
 					 if(textField.getText().trim().equals(textField_1.getText().trim()))
 					 {
 					 
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 				PreparedStatement stmt=con.prepareStatement("update admin_details set admin_username= ? where 	admin_id= ?");
 					stmt.setString(1, textField_1.getText().trim());		
 					stmt.setInt(2, Integer.parseInt(lblNewLabel_2.getText()));	
@@ -166,7 +166,7 @@ public class admin_password_change extends JFrame {
 					 if(textField.getText().trim().equals(textField_1.getText().trim()))
 					 {
 					 
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 				PreparedStatement stmt=con.prepareStatement("update admin_details  set admin_password= md5(?) where admin_id= ?");
 					stmt.setString(1, textField_1.getText().trim());		
 					stmt.setInt(2, Integer.parseInt(lblNewLabel_2.getText()));	

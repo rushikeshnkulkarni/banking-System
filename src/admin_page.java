@@ -140,24 +140,6 @@ public class admin_page extends JFrame {
 			
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 1037, 596);
-		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		setJMenuBar(menuBar);
-		
-		JMenu mnNewMenu_1 = new JMenu("New");
-		menuBar.add(mnNewMenu_1);
-		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Create new  Admin");
-		mntmNewMenuItem.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			
-				new_admin na= new new_admin();
-				na.lblNewLabel_12.setText(lblNewLabel_29.getText());
-				new new_admin().setVisible(true);
-			}
-		});
-		mnNewMenu_1.add(mntmNewMenuItem);
 		contentPane = new JPanel();
 		contentPane.setBorder(new MatteBorder(1, 1, 1, 1, (Color) new Color(0, 0, 0)));
 		setContentPane(contentPane);
@@ -471,7 +453,7 @@ public class admin_page extends JFrame {
 		 			
 		 			try {
 		 				
-		 				con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+		 				con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 		 				stmt=con.prepareStatement("insert into emp_details (emp_username,emp_password,emp_name,emp_gender,emp_post,emp_mobile,emp_salary,emp_acnumber,emp_mail,address,photo,adhar_photo,join_date) values( ?,md5(?),?,?,?,?,?,?,?,?,?,?,?)");
 		 				
 		 				stmt.setString(1,textField_3.getText().trim());
@@ -678,7 +660,7 @@ public class admin_page extends JFrame {
 				} 				
 		 		
 		 	try {
-		 		con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+		 		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 		 		 sta=con.createStatement();   															
 		 	rs=	sta.executeQuery("select emp_id,emp_username,emp_name,emp_gender,emp_post,emp_mobile,emp_salary,emp_mail,address,join_date from emp_details");
 		 		while (rs.next()) {
@@ -809,7 +791,7 @@ public class admin_page extends JFrame {
 				
 				try {
 					
-					con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+					con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 					 sta=con.createStatement();   															
 					
 	 				 rs=sta.executeQuery("select * from emp_details where emp_acnumber="+Long.parseLong(textField_12.getText().trim())+"");
@@ -897,7 +879,7 @@ public class admin_page extends JFrame {
 				} 
 		 		
 		 		try {
-		 			con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+		 			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 		 			sta=con.createStatement();
 		 			rs=sta.executeQuery("select emp_id,emp_salary,emp_acnumber from emp_details where emp_post='"+comboBox_2.getSelectedItem().toString()+"'");
 		 		//	if(rs.next())
@@ -1106,7 +1088,7 @@ public class admin_page extends JFrame {
 				
 				
 		try {
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 			 sta=con.createStatement();   															
 			 	rs=	sta.executeQuery("select emp_name,emp_gender,emp_post,emp_mobile,emp_salary,emp_mail,address from emp_details where emp_id="+Long.parseLong(textField_14.getText().trim())+"");
 			 	
@@ -1151,7 +1133,7 @@ public class admin_page extends JFrame {
 				
 				try {
 					
-					con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+					con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system");
 					stmt=con.prepareStatement("update emp_details set emp_name=?,emp_gender=?,emp_post=?,emp_mobile=?,emp_salary=?,emp_mail=?,address=? where emp_id=?");
 				
 					stmt.setString(1, textField_6.getText().trim());
@@ -1234,7 +1216,7 @@ public class admin_page extends JFrame {
 				
 				try {
 					
-					Connection  con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					Connection  con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 				 PreparedStatement stmt=con.prepareStatement("delete from emp_details where emp_id="+Integer.parseInt(textField_4.getText().trim())+"");
 				int xx=	stmt.executeUpdate();
 				
@@ -1318,7 +1300,7 @@ public class admin_page extends JFrame {
 				
 				try {
 					
-					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					 sta=con.createStatement();
 					 rs=sta.executeQuery("select ac_number,ifccode,fullname,gender,mobile_number,accountType,birthdate,addhar_number,address,created_date from cus_details");
 					 
@@ -1370,7 +1352,7 @@ public class admin_page extends JFrame {
 		btnNewButton_11.setBounds(421, 395, 98, 28);
 		panel_9.add(btnNewButton_11);
 		
-		JButton btnNewButton_14 = new JButton("");
+		JButton btnNewButton_14 = new JButton("print");
 		btnNewButton_14.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
 		btnNewButton_14.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1393,7 +1375,7 @@ public class admin_page extends JFrame {
 			}
 		});
 		btnNewButton_14.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_14.setBounds(589, 395, 43, 28);
+		btnNewButton_14.setBounds(589, 395, 98, 28);
 		panel_9.add(btnNewButton_14);
 		
 		JPanel panel_10 = new JPanel();
@@ -1436,7 +1418,7 @@ public class admin_page extends JFrame {
 				
 				try {
 					
-					 con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root",""); 
+					 con=DriverManager.getConnection("jdbc:mysql://localhost:3306/bank","root","system"); 
 					 sta=con.createStatement();
 					 rs=sta.executeQuery("select ac_number,credit_amount,credit_date,debit_amount,debit_date,total_amount,credted_By,debited_By from transcation where ac_number="+Integer.parseInt(textField_16.getText().trim())+"");
 					 
@@ -1505,7 +1487,7 @@ public class admin_page extends JFrame {
 		table_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		table_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JButton btnNewButton_15 = new JButton("");
+		JButton btnNewButton_15 = new JButton("print");
 		btnNewButton_15.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Devices-printer-icon.png"));
 		btnNewButton_15.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1527,12 +1509,12 @@ public class admin_page extends JFrame {
 				
 			}
 		});
-		btnNewButton_15.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton_15.setBounds(702, 24, 43, 36);
+		btnNewButton_15.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 12));
+		btnNewButton_15.setBounds(702, 24, 85, 36);
 		panel_10.add(btnNewButton_15);
 		
 		
-		JButton btnNewButton_9 = new JButton("");
+		JButton btnNewButton_9 = new JButton("logout");
 		btnNewButton_9.setIcon(new ImageIcon("C:\\Users\\acer\\Downloads\\Apps-session-logout-icon (1).png"));
 		btnNewButton_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -1544,8 +1526,8 @@ public class admin_page extends JFrame {
 				}
 			}
 		});
-		btnNewButton_9.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnNewButton_9.setBounds(943, 0, 53, 34);
+		btnNewButton_9.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnNewButton_9.setBounds(918, 0, 78, 34);
 		contentPane.add(btnNewButton_9);
 		
 		 lblNewLabel_29 = new JLabel("");

@@ -105,7 +105,7 @@ public class change_user_pass extends JFrame {
 					 if(textField.getText().trim().equals(textField_1.getText().trim()))
 					 {
 					 
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+					Connection con=DriverManager.getConnection("jdbc:mysql://:3306/bank","root","system");
 				PreparedStatement stmt=con.prepareStatement("update emp_details set emp_password= md5(?) where 	emp_id= ?");
 					stmt.setString(1, textField_1.getText().trim());		
 					stmt.setInt(2, Integer.parseInt(lblNewLabel_2.getText()));	
@@ -171,7 +171,7 @@ public class change_user_pass extends JFrame {
 					 if(textField.getText().trim().equals(textField_1.getText().trim()))
 					 {
 					 
-					Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3308/bank","root","");
+					Connection con=DriverManager.getConnection("jdbc:mysql://:3306/bank","root","system");
 				PreparedStatement stmt=con.prepareStatement("update emp_details set 	emp_username= ? where 	emp_id= ?");
 					stmt.setString(1, textField_1.getText().trim());		
 					stmt.setInt(2, Integer.parseInt(lblNewLabel_2.getText()));	
